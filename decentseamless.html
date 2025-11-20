@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seamless Point of Care | Healthcare IT Integration Experts</title>
+    <meta name="description" content="Expert point-of-care IT installation, cable management, and lifecycle solutions for hospitals and clinics. We bridge the gap between IT and patient care.">
+    <style>
+        /* --- RESET & BASE STYLES --- */
+        :root {
+            --primary-blue: #0056b3;
+            --dark-blue: #002a4d; /* Darker navy for contrast */
+            --accent-blue: #e6f0fa;
+            --text-dark: #1a202c;
+            --text-gray: #4a5568;
+            --white: #ffffff;
+            --bg-light: #f7fafc;
+            --border-radius: 12px; /* Softer, modern radius */
+            --container-width: 1200px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.2s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding { padding: 100px 0; }
+        .section-padding-sm { padding: 60px 0; }
+
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: var(--accent-blue);
+            color: var(--primary-blue);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-blue);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            color: var(--dark-blue);
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        h1 { font-size: 3.5rem; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; letter-spacing: -0.01em; margin-bottom: 1rem; }
+        h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+        p { color: var(--text-gray); margin-bottom: 1.5rem; font-size: 1.125rem; }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+            padding: 16px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-blue);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo span { color: var(--dark-blue); }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover { color: var(--primary-blue); }
+
+        .nav-btn {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* --- HERO SECTION (Split Layout) --- */
+        .hero {
+            padding: 80px 0 100px;
+            background: radial-gradient(circle at top right, var(--accent-blue) 0%, #ffffff 60%);
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        /* Placeholder for Hero Image */
+        .hero-img-placeholder {
+            width: 100%;
+            height: 500px;
+            background-color: #e2e8f0;
+            border-radius: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230056b3' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9aa5b1;
+            font-weight: 600;
+        }
+        
+        /* --- STATS BAR --- */
+        .stats-bar {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 40px 0;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .stat-item { border-right: 1px solid rgba(255,255,255,0.15); }
+        .stat-item:last-child { border-right: none; }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+            color: #63b3ed; /* Lighter blue for numbers */
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        /* --- SERVICES SECTION --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            border: 1px solid #edf2f7;
+            transition: all 0.3s ease;
+            position: relative;
+            top: 0;
+        }
+
+        .service-card:hover {
+            top: -8px;
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-blue);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-blue);
+            color: var(--primary-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+        }
+
+        /* --- FEATURE ROWS (Alternating) --- */
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+        
+        .feature-row:last-child { margin-bottom: 0; }
+
+        .feature-row.reverse {
+            direction: rtl; /* Simple way to swap columns for desktop */
+        }
+        
+        .feature-row.reverse .feature-content {
+            direction: ltr; /* Reset text direction */
+        }
+
+        .feature-img {
+            height: 400px;
+            background-color: #edf2f7;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            color: var(--text-gray);
+        }
+
+        .feature-list li svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            margin-top: 4px;
+            fill: var(--primary-blue);
+            flex-shrink: 0;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonial-section {
+            background-color: var(--bg-light);
+            position: relative;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .quote-icon {
+            font-size: 2rem;
+            color: #cbd5e0;
+            margin-bottom: 20px;
+        }
+
+        .quote-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+        }
+
+        .author-block {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: #cbd5e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #718096;
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            border-radius: 20px;
+            padding: 80px;
+            text-align: center;
+            margin-bottom: -80px; /* Overlap footer */
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-section h2 { color: var(--white); margin-bottom: 16px; }
+        .cta-section p { color: #a0aec0; max-width: 600px; margin: 0 auto 32px; }
+
+        /* --- FORM --- */
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: var(--text-dark); }
+        .form-input { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 8px; 
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .form-input:focus { border-color: var(--primary-blue); outline: none; box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1); }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #1a202c;
+            color: #718096;
+            padding: 160px 0 40px; /* Extra top padding for CTA overlap */
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #2d3748;
+            padding-bottom: 40px;
+        }
+        
+        .footer-col h4 { color: var(--white); font-size: 1.1rem; margin-bottom: 20px; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a:hover { color: var(--white); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 968px) {
+            .hero-grid, .feature-row, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-grid { text-align: center; }
+            .hero-content { margin: 0 auto; }
+            .feature-row.reverse { direction: ltr; }
+            h1 { font-size: 2.5rem; }
+            .stats-bar { margin-top: 0; }
+            .nav-links { display: none; } /* Simplified mobile nav */
+            .cta-section { padding: 40px 24px; margin-bottom: 0; border-radius: 0; }
+            footer { padding-top: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <!-- Simple CSS Logo Icon -->
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="4" width="20" height="16" rx="4" fill="#0056b3"/>
+                    <path d="M8 12H16M8 8H16M8 16H12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Seamless <span>POC</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">How We Work</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact" class="btn btn-primary nav-btn">Schedule Project</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="badge">Healthcare IT Integration</span>
+                <h1>Reliable IT Installs. <br>Smarter Workflow. <br>Better Care.</h1>
+                <p>We handle the chaos of installation, procurement, and cable management so your clinical staff can focus on what matters most: the patient.</p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-primary">Start Your Project</a>
+                    <a href="#process" class="btn btn-outline">See Our Process</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-img-placeholder">
+                    <!-- Placeholder for an image of a nurse using a clean workstation -->
+                    <div style="text-align: center;">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 10px; opacity: 0.5;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <div style="opacity: 0.6;">Clean Clinical Workspace</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div class="container">
+        <div class="stats-bar">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000s</span>
+                    <span class="stat-label">Of Installations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Healthcare Focused</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES OVERVIEW -->
+    <section id="services" class="section-padding">
+        <div class="container">
+            <div class="text-center" style="max-width: 700px; margin: 0 auto;">
+                <span class="badge">What We Do</span>
+                <h2>Complete Point-of-Care Solutions</h2>
+                <p>From finding the right mount to managing the last wire, we bridge the gap between IT hardware and clinical reality.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">&#128295;</div>
+                    <h3>Expert Installation</h3>
+                    <p>Our "IT Ninjas" work quietly in sensitive areas, mounting workstations, cabinets, and tracking boards without disrupting care.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">&#128268;</div>
+                    <h3>Cable Management</h3>
+                    <p>We eliminate tangles. By stowing hardware and using custom lengths, we create cleaner, infection-control friendly rooms.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">&#128202;</div>
+                    <h3>Workflow Analysis</h3>
+                    <p>We don't just bolt things to walls. We analyze clinician workflow to ensure the technology fits the room, not the other way around.</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">&#128736;</div>
+                    <h3>Lifecycle Management</h3>
+                    <p>Protect your investment with our maintenance plans. We keep carts and mounts functioning safely for years.</p>
+                </div>
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">&#128188;</div>
+                    <h3>Simplified Procurement</h3>
+                    <p>One quote covers it all: product, materials, labor, and warranty. Stop juggling five different purchase orders.</p>
+                </div>
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">&#127973;</div>
+                    <h3>Specialty Units</h3>
+                    <p>Anesthesia carts, Bedside EMR, Surgery Boards, and more. We customize solutions for every department.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTIONS (Story Flow) -->
+    <section id="process" class="section-padding" style="background-color: var(--bg-light);">
+        <div class="container">
+            
+            <!-- Row 1: Text Left, Image Right -->
+            <div class="feature-row">
+                <div class="feature-content">
+                    <span class="badge">The "IT Ninja" Approach</span>
+                    <h2>Stealthy, Clean, & Clinical-Ready</h2>
+                    <p>Hospitals are not construction sites. They are places of healing. Our team understands infection control, patient privacy, and the need for silence.</p>
+                    <ul class="feature-list">
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Unobtrusive installation (evenings/weekends available)</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Infection control protocols strictly followed</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Clean-up is part of the job—we leave no trace</li>
+                    </ul>
+                </div>
+                <div class="feature-img">
+                    <div style="width:100%; height:100%; background: #cbd5e0; display: flex; align-items: center; justify-content: center; color: #718096;">
+                        Image: Technician working quietly in scrubs
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Image Left, Text Right -->
+            <div class="feature-row reverse">
+                <div class="feature-content">
+                    <span class="badge">Total Transparency</span>
+                    <h2>No Hidden Costs. No Surprises.</h2>
+                    <p>We believe in "Seamless" business practices too. From start to finish, you get clear communication and reliable timelines.</p>
+                    <ul class="feature-list">
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Fixed project costs (low change orders)</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> We hit your go-live dates</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Custom solutions for unique room layouts</li>
+                    </ul>
+                </div>
+                <div class="feature-img">
+                    <div style="width:100%; height:100%; background: #cbd5e0; display: flex; align-items: center; justify-content: center; color: #718096;">
+                        Image: Project manager reviewing plans
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section-padding testimonial-section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 60px;">
+                <h2>Trusted by Clinical Leaders</h2>
+                <p>When you make IT integration easy, you make a lot of fans.</p>
+            </div>
+
+            <div class="testimonial-grid">
+                <!-- Card 1 -->
+                <div class="testimonial-card">
+                    <div class="quote-icon">“</div>
+                    <p class="quote-text">They installed over 400 workstations across 90 clinics. The results were fantastic—our physicians and nurses are extremely happy with the setup.</p>
+                    <div class="author-block">
+                        <div class="author-avatar">MS</div>
+                        <div>
+                            <strong>Marlene Sides</strong>
+                            <div style="font-size: 0.85rem; color: #718096;">RN Director of IS, Medical College of Georgia</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="testimonial-card">
+                    <div class="quote-icon">“</div>
+                    <p class="quote-text">They faced unique challenges from management and physicians, yet missed no deadlines. Their technical knowledge was instrumental.</p>
+                    <div class="author-block">
+                        <div class="author-avatar">DR</div>
+                        <div>
+                            <strong>D. Rock</strong>
+                            <div style="font-size: 0.85rem; color: #718096;">IT Director, New Hanover Regional Medical Center</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="testimonial-card">
+                    <div class="quote-icon">“</div>
+                    <p class="quote-text">They exhibit a true understanding of the clinical environment. Their installations are professional, clean, and respectful of patient privacy.</p>
+                    <div class="author-block">
+                        <div class="author-avatar">CG</div>
+                        <div>
+                            <strong>Candace Gregory</strong>
+                            <div style="font-size: 0.85rem; color: #718096;">President, CIS Consulting, LLC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / CONTACT -->
+    <div class="container">
+        <section id="contact" class="cta-section">
+            <h2>Ready to Streamline Your Rollout?</h2>
+            <p>Tell us about your facility or equipment needs. We'll help you plan the solution, handle procurement, and manage the install.</p>
+            
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="Jane Doe">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Work Email</label>
+                        <input type="email" class="form-input" placeholder="jane@hospital.org">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">How can we help?</label>
+                        <textarea class="form-input" rows="4" placeholder="We need 50 mounts installed..."></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <!-- White Logo Variant -->
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="4" width="20" height="16" rx="4" fill="#ffffff"/>
+                            <path d="M8 12H16M8 8H16M8 16H12" stroke="#0056b3" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span style="color: #fff; margin-left: 8px;">Seamless POC</span>
+                    </div>
+                    <p style="font-size: 0.9rem;">Making Healthcare IT Integration Easy. We handle the physical layer of technology so you can focus on care.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Installation</a></li>
+                        <li><a href="#">Procurement</a></li>
+                        <li><a href="#">Cable Management</a></li>
+                        <li><a href="#">Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>support@seamlesspoc.com</li>
+                        <li>1-800-555-0199</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center" style="border-top: 1px solid #2d3748; padding-top: 20px; font-size: 0.85rem;">
+                &copy; 2025 Seamless Point of Care. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
