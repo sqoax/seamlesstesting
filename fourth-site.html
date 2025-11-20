@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seamless Point of Care | Reliable Healthcare IT Hardware Installs</title>
+  <meta name="description" content="Seamless Point of Care designs, installs, and maintains point-of-care hardware so hospitals and clinics get clinical-ready workspaces without disrupting care." />
+  
+  <style>
+    /* --- 1. Variables & Design System --- */
+    :root {
+      /* Color Palette (Modern Slate/Blue) */
+      --color-primary: #2563eb;      /* Blue 600 */
+      --color-primary-dark: #1d4ed8; /* Blue 700 */
+      --color-primary-light: #eff6ff;/* Blue 50 */
+      
+      --color-text-main: #0f172a;    /* Slate 900 */
+      --color-text-body: #475569;    /* Slate 600 */
+      --color-text-muted: #94a3b8;   /* Slate 400 */
+      
+      --color-bg-white: #ffffff;
+      --color-bg-soft: #f8fafc;      /* Slate 50 */
+      --color-bg-dark: #020617;      /* Slate 950 */
+      
+      --color-border: #e2e8f0;       /* Slate 200 */
+      --color-success: #16a34a;      /* Green 600 */
+      --color-success-bg: #f0fdf4;   /* Green 50 */
+
+      /* Spacing & Layout */
+      --container-width: 1140px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-full: 9999px;
+      
+      /* Shadows (Tailwind-esque) */
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+
+      /* Transitions */
+      --ease-spring: cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* --- 2. Reset & Base --- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      /* Prevents sticky header from covering anchors */
+      scroll-padding-top: 100px; 
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--color-text-main);
+      background-color: var(--color-bg-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { text-decoration: none; color: inherit; transition: color 0.2s ease; }
+    ul { list-style: none; }
+    img, svg { display: block; max-width: 100%; }
+    button, input, textarea { font-family: inherit; }
+
+    /* --- 3. Typography --- */
+    h1, h2, h3, h4 {
+      color: var(--color-text-main);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); margin-bottom: 1.25rem; }
+    h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; margin-bottom: 0.5rem; font-weight: 700; }
+    
+    p {
+      color: var(--color-text-body);
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+
+    /* --- 4. Utility Components --- */
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section { padding: 96px 0; }
+    .section-sm { padding: 64px 0; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: currentColor;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-spring);
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: white;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-primary);
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-outline:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+    }
+
+    /* --- 5. Header --- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--color-text-main);
+      letter-spacing: -0.03em;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #60a5fa, var(--color-primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a:not(.btn) {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--color-text-body);
+    }
+
+    .nav-links a:not(.btn):hover { color: var(--color-primary); }
+
+    /* --- 6. Hero Section --- */
+    .hero {
+      padding-top: 60px;
+      padding-bottom: 80px;
+      background: 
+        radial-gradient(circle at 0% 0%, rgba(239, 246, 255, 0.8) 0%, transparent 40%),
+        radial-gradient(circle at 100% 0%, rgba(240, 253, 244, 0.5) 0%, transparent 40%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      background: linear-gradient(to right, var(--color-text-main), var(--color-text-body));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      /* Fallback */
+      color: var(--color-text-main); 
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      padding-top: 24px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .hero-meta-item { display: flex; align-items: center; gap: 8px; }
+    .check-icon { color: var(--color-success); }
+
+    /* Hero Card Graphic */
+    .hero-visual-card {
+      background: white;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--color-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+    
+    .step-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px;
+      background: var(--color-bg-soft);
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .step-item:hover {
+      background: white;
+      border-color: var(--color-primary-light);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: white;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-main);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .step-item:nth-child(1) .step-num { background: var(--color-primary-light); color: var(--color-primary); border-color: transparent; }
+    .step-item:nth-child(2) .step-num { background: var(--color-success-bg); color: var(--color-success); border-color: transparent; }
+
+    /* --- 7. Stats Bar --- */
+    .stats-container { margin-top: 48px; }
+    
+    .stats-bar {
+      background: var(--color-bg-dark);
+      color: white;
+      border-radius: 20px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .stat-block h3 { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0; }
+    .stat-value { font-size: 2.5rem; font-weight: 800; color: white; margin: 8px 0; letter-spacing: -0.03em; }
+    .stat-desc { font-size: 0.9rem; color: #64748b; line-height: 1.5; }
+
+    /* --- 8. Standard Sections --- */
+    .section-header {
+      max-width: 680px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+
+    /* Grids */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .card-overline {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .card-metrics {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-bg-soft);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .metric-label { font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .metric-data { font-weight: 700; color: var(--color-text-main); font-size: 0.95rem; }
+
+    /* Testimonials */
+    .bg-soft { background-color: var(--color-bg-soft); }
+    
+    .testimonial-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+    .quote-icon { font-size: 3rem; color: #cbd5e1; line-height: 1; margin-bottom: -10px; font-family: serif; }
+    
+    .author-row {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 20px;
+    }
+    
+    .avatar {
+      width: 40px;
+      height: 40px;
+      background: #e2e8f0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--color-text-body);
+      font-size: 0.85rem;
+    }
+
+    /* Services */
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-primary-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--color-primary);
+    }
+    
+    .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      color: var(--color-text-body);
+      font-weight: 500;
+    }
+
+    .use-case-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    
+    .use-case-pill {
+      background: white;
+      border: 1px solid var(--color-border);
+      padding: 10px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      color: var(--color-text-body);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .use-case-dot { width: 6px; height: 6px; background: var(--color-primary); border-radius: 50%; }
+
+    /* --- 9. Contact / CTA --- */
+    .cta-wrapper {
+      background: linear-gradient(135deg, var(--color-primary-dark), #0f172a);
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .cta-inner {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 48px;
+      padding: 48px;
+    }
+
+    .cta-content { color: white; }
+    .cta-content h2 { color: white; margin-bottom: 16px; }
+    .cta-content p { color: #bfdbfe; font-size: 1.1rem; }
+
+    .contact-form {
+      background: var(--color-bg-dark);
+      padding: 24px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { margin-bottom: 16px; }
+    
+    .form-label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 12px;
+      border-radius: 8px;
+      color: white;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+      background: #0f172a;
+    }
+
+    textarea.form-input { min-height: 100px; resize: vertical; }
+
+    /* --- 10. Footer --- */
+    footer {
+      background: var(--color-bg-dark);
+      color: var(--color-text-muted);
+      padding: 80px 0 32px;
+      margin-top: 80px;
+      font-size: 0.9rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .footer-brand .logo-text { color: white; font-weight: 700; font-size: 1.1rem; display: block; margin-top: 12px; }
+    
+    .footer-col h4 { color: white; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a:hover { color: white; text-decoration: underline; }
+
+    .footer-bottom {
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* --- 11. Responsive Breakpoints --- */
+    @media (max-width: 992px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-actions, .hero-meta { justify-content: center; }
+      .stats-bar { grid-template-columns: 1fr; text-align: center; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .nav-links { display: none; } /* Hiding desktop links for mobile simplicity */
+      .nav::after {
+        content: "Menu";
+        display: block;
+        /* This is a fallback for mobile menu since we have no JS */
+        font-weight: 600;
+        color: var(--color-primary);
+        display: none; 
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .section { padding: 64px 0; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .container { padding: 0 20px; }
+      .cta-inner { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h10M4 18h8" />
+          </svg>
+        </div>
+        <span>Seamless<span style="color:var(--color-primary)">POC</span></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#proof">Results</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact" class="btn btn-primary">15-Minute Assessment</a></li>
+        </ul>
+        <div style="display:none;">
+          <a href="#contact" class="btn btn-primary" style="padding: 8px 16px; font-size:0.85rem">Book</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="badge">
+              <span class="badge-dot"></span>
+              Healthcare IT Hardware Installs
+            </div>
+            <h1>Clinical-ready workspaces, installed without disrupting care.</h1>
+            <p>Seamless Point of Care designs, installs, and maintains hardware so your go-lives stay on schedule and clinicians get safe workspaces that just work.</p>
+            
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary">Request Rollout Assessment</a>
+              <a href="#proof" class="btn btn-outline">View Project Outcomes</a>
+            </div>
+
+            <div class="hero-meta">
+              <div class="hero-meta-item">
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>100% Healthcare Focused</span>
+              </div>
+              <div class="hero-meta-item">
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>IDNs & Ambulatory</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual-card">
+            <div style="margin-bottom:16px">
+              <span style="background:#e0f2fe; color:#0369a1; padding:4px 12px; border-radius:99px; font-size:0.75rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;">The Seamless Standard</span>
+            </div>
+            <h3 style="font-size:1.1rem; margin-bottom:8px;">How a rollout actually runs</h3>
+            
+            <div class="step-list">
+              <div class="step-item">
+                <div class="step-num">1</div>
+                <div>
+                  <div style="font-weight:700; font-size:0.95rem; color:var(--color-text-main)">Room-by-room plan</div>
+                  <div style="font-size:0.85rem; color:var(--color-text-body)">Mapping cable paths and hardware to fit real clinical workflows.</div>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-num">2</div>
+                <div>
+                  <div style="font-weight:700; font-size:0.95rem; color:var(--color-text-main)">Quiet, clean installs</div>
+                  <div style="font-size:0.85rem; color:var(--color-text-body)">Evening/weekend windows. No dust, no dangling cords.</div>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-num">3</div>
+                <div>
+                  <div style="font-weight:700; font-size:0.95rem; color:var(--color-text-main)">Lifecycle support</div>
+                  <div style="font-size:0.85rem; color:var(--color-text-body)">We handle tweaks and refreshes so IT stays focused on software.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-container">
+          <div class="stats-bar">
+            <div class="stat-block">
+              <h3>Experience</h3>
+              <div class="stat-value">20+ Years</div>
+              <div class="stat-desc">Specialized in point-of-care hardware and cable management.</div>
+            </div>
+            <div class="stat-block">
+              <h3>Scale</h3>
+              <div class="stat-value">400+ Units</div>
+              <div class="stat-desc">Delivered in single ambulatory rollouts on strict timelines.</div>
+            </div>
+            <div class="stat-block">
+              <h3>Focus</h3>
+              <div class="stat-value">100% Med</div>
+              <div class="stat-desc">Hospitals and clinics only. No generic commercial installs.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-soft">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge"><span class="badge-dot"></span>Trusted by Leaders</div>
+          <h2>What leaders say after a rollout.</h2>
+          <p>IS Directors, Nursing Leaders, and Ops managers call us back because we understand the clinical environment.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card testimonial-card">
+            <div class="quote-icon">“</div>
+            <p>The work was organized, on time, and our physicians and nurses are very happy with the setups across 90 clinics.</p>
+            <div class="author-row">
+              <div class="avatar">MS</div>
+              <div>
+                <div style="font-weight:700; font-size:0.9rem;">RN Director of IS</div>
+                <div style="font-size:0.8rem; color:var(--color-text-muted)">Academic Medical Center</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card testimonial-card">
+            <div class="quote-icon">“</div>
+            <p>They handled shifting clinical schedules and last-minute changes without missing deadlines. Their technical depth took pressure off our team.</p>
+            <div class="author-row">
+              <div class="avatar">DR</div>
+              <div>
+                <div style="font-weight:700; font-size:0.9rem;">IT Director</div>
+                <div style="font-size:0.8rem; color:var(--color-text-muted)">Regional Medical Center</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card testimonial-card">
+            <div class="quote-icon">“</div>
+            <p>The installs are clean, professional, and respectful of privacy. They understand that a hospital isn't a construction site.</p>
+            <div class="author-row">
+              <div class="avatar">CG</div>
+              <div>
+                <div style="font-weight:700; font-size:0.9rem;">President</div>
+                <div style="font-size:0.8rem; color:var(--color-text-muted)">Healthcare Consulting</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proof" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge"><span class="badge-dot"></span>Proven Outcomes</div>
+          <h2>Fewer surprises. Go-lives that hold.</h2>
+          <p>Real results from the field. Adjust these numbers to match your internal data.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <span class="card-overline">Ambulatory Rollout</span>
+            <h3>90-Clinic Hardware Upgrade</h3>
+            <p style="font-size:0.95rem;">Wall-mounted workstations and tracking boards across multi-site locations with limited downtime.</p>
+            <div class="card-metrics">
+              <div>
+                <div class="metric-label">Scope</div>
+                <div class="metric-data">90 Locations</div>
+              </div>
+              <div>
+                <div class="metric-label">Outcome</div>
+                <div class="metric-data" style="color:var(--color-success)">All Dates Met</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-overline">Inpatient Units</span>
+            <h3>ICU & Step-down Refresh</h3>
+            <p style="font-size:0.95rem;">Bedside EMR replacement in active units with strict infection control requirements.</p>
+            <div class="card-metrics">
+              <div>
+                <div class="metric-label">Environment</div>
+                <div class="metric-data">Active ICU</div>
+              </div>
+              <div>
+                <div class="metric-label">Feedback</div>
+                <div class="metric-data" style="color:var(--color-success)">Clinician Approved</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-overline">Perioperative</span>
+            <h3>OR & Anesthesia Carts</h3>
+            <p style="font-size:0.95rem;">Standardized mounting across ORs for uniform anesthesia layouts and faster turnover.</p>
+            <div class="card-metrics">
+              <div>
+                <div class="metric-label">Impact</div>
+                <div class="metric-data">Standardization</div>
+              </div>
+              <div>
+                <div class="metric-label">Support</div>
+                <div class="metric-data">Lifecycle Mgmt</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section bg-soft">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge"><span class="badge-dot"></span>Capabilities</div>
+          <h2>End-to-end point of care, from wall plate to workstation.</h2>
+          <p>One partner to design, install, and support the physical layer of your healthcare IT.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="service-icon">🔧</div>
+            <h3>Point-of-Care Install</h3>
+            <p style="font-size:0.95rem; margin-bottom:0;">Mounting carts, cabinets, and arms in active clinical areas with minimal disruption.</p>
+            <div class="tag-container">
+              <span class="tag">Evening/Weekends</span>
+              <span class="tag">Multi-facility</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="service-icon">🔌</div>
+            <h3>Cable Management</h3>
+            <p style="font-size:0.95rem; margin-bottom:0;">Right-sized cables and protected paths built to respect infection control.</p>
+            <div class="tag-container">
+              <span class="tag">No Trip Hazards</span>
+              <span class="tag">Cleanable</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="service-icon">🛡️</div>
+            <h3>Lifecycle Protection</h3>
+            <p style="font-size:0.95rem; margin-bottom:0;">Maintenance and refresh work so carts perform like day one.</p>
+            <div class="tag-container">
+              <span class="tag">PM Visits</span>
+              <span class="tag">Asset Tracking</span>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="service-icon">📐</div>
+            <h3>Workflow Alignment</h3>
+            <p style="font-size:0.95rem; margin-bottom:0;">We position hardware to support the patient visit, not obstruct it.</p>
+            <div class="tag-container">
+              <span class="tag">Ergonomics</span>
+              <span class="tag">Bedside EMR</span>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="service-icon">📦</div>
+            <h3>Design & Procurement</h3>
+            <p style="font-size:0.95rem; margin-bottom:0;">Hardware-neutral recommendations and single-proposal bundling.</p>
+            <div class="tag-container">
+              <span class="tag">CapEx Aligned</span>
+              <span class="tag">Eval Units</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="service-icon">🚀</div>
+            <h3>Go-Live Support</h3>
+            <p style="font-size:0.95rem; margin-bottom:0;">Coordination with IS and Clinical teams to ensure hardware is ready.</p>
+            <div class="tag-container">
+              <span class="tag">Zero Delay</span>
+              <span class="tag">Rapid Response</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="use-case-grid">
+           <div class="use-case-pill"><span>Bedside Workstations</span><div class="use-case-dot"></div></div>
+           <div class="use-case-pill"><span>L&D Rooms</span><div class="use-case-dot"></div></div>
+           <div class="use-case-pill"><span>ICU Refreshes</span><div class="use-case-dot"></div></div>
+           <div class="use-case-pill"><span>Ambulatory Exam Rooms</span><div class="use-case-dot"></div></div>
+           <div class="use-case-pill"><span>Command Centers</span><div class="use-case-dot"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="section">
+      <div class="container">
+        <div class="hero-grid" style="align-items: flex-start;">
+          <div>
+            <div class="badge"><span class="badge-dot"></span>Process</div>
+            <h2>Designed around patient care, not contractor convenience.</h2>
+            <p>Hospitals are not construction sites. We plan installs around census, infection control, and privacy.</p>
+            
+            <div style="margin-top:32px; padding-left:20px; border-left: 2px solid var(--color-border);">
+              <div style="margin-bottom:24px;">
+                <h4 style="color:var(--color-primary);">1. Assessment & Layout</h4>
+                <p style="font-size:0.95rem; margin-bottom:0;">We generate room-by-room inventories and proposed layouts that respect your contracts and standards.</p>
+              </div>
+              <div style="margin-bottom:24px;">
+                <h4 style="color:var(--color-primary);">2. Install on Your Terms</h4>
+                <p style="font-size:0.95rem; margin-bottom:0;">Work windows match clinical reality. Rooms are returned in clinical-ready condition—no debris.</p>
+              </div>
+              <div>
+                <h4 style="color:var(--color-primary);">3. Post-Go-Live Support</h4>
+                <p style="font-size:0.95rem; margin-bottom:0;">We stay available for tweaks and repairs so you don't end up with a fleet of "almost-right" rooms.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div style="background:var(--color-bg-soft); border-radius:24px; height:100%; min-height:300px; display:flex; align-items:center; justify-content:center; border:1px dashed #cbd5e1;">
+            <div style="text-align:center; color:var(--color-text-muted);">
+               <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin:0 auto 16px; opacity:0.5;">
+                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                 <line x1="8" y1="21" x2="16" y2="21"></line>
+                 <line x1="12" y1="17" x2="12" y2="21"></line>
+               </svg>
+               <div style="font-size:0.9rem; font-weight:600;">Clinical-Ready Standard</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-sm">
+      <div class="container">
+        <div class="cta-wrapper">
+          <div class="cta-inner">
+            <div class="cta-content">
+              <h2>Book a 15-minute rollout assessment.</h2>
+              <p>Share where you’re stuck—aging carts, messy cabling, or upcoming go-lives. We’ll outline effort, timelines, and risks.</p>
+              <div style="margin-top:24px; display:flex; gap:12px; align-items:center; font-size:0.9rem; color:#93c5fd;">
+                 <div style="width:24px; height:24px; background:rgba(255,255,255,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center;">✓</div>
+                 No generic sales pitch. Just project realities.
+              </div>
+            </div>
+            
+            <form class="contact-form" action="#" method="post">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="name">Full Name</label>
+                  <input type="text" id="name" name="name" class="form-input" placeholder="Jane Doe" autocomplete="name" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="email">Work Email</label>
+                  <input type="email" id="email" name="email" class="form-input" placeholder="jane@hospital.org" autocomplete="email" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="org">Organization</label>
+                <input type="text" id="org" name="organization" class="form-input" placeholder="Health System Name" autocomplete="organization" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="msg">How can we help?</label>
+                <textarea id="msg" name="message" class="form-input" placeholder="E.g. Refresh 60 ICU workstations before Q3..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;">Request Assessment</button>
+              <p style="font-size:0.75rem; color:#64748b; margin-top:12px; text-align:center;">
+                Or email <strong style="color:#94a3b8">support@seamlesspoc.com</strong>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-mark" style="width:28px; height:28px;">
+             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <path d="M4 6h16M4 12h10M4 18h8" />
+            </svg>
+          </div>
+          <span class="logo-text">Seamless POC</span>
+          <p style="margin-top:16px; font-size:0.85rem; color:#64748b; line-height:1.5;">
+            We handle the physical layer of your healthcare IT installs so your teams can stay focused on care, not cords and carts.
+          </p>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Point-of-Care Installs</a></li>
+            <li><a href="#services">Cable Management</a></li>
+            <li><a href="#services">Solution Design</a></li>
+            <li><a href="#services">Lifecycle Support</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#proof">Results</a></li>
+            <li><a href="#process">How we work</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li>support@seamlesspoc.com</li>
+            <li>1-800-555-0199</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <span>© 2025 Seamless Point of Care. All rights reserved.</span>
+        <span>Healthcare IT Integration · Clinical Workspaces</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
