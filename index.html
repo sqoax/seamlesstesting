@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Site Preview Switcher</title>
+  <title>Seamless POC – Concept Previews</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
       --bg: #020617;
-      --card: #0b1220;
+      --card: #020617;
       --accent: #2563eb;
-      --accent-soft: #1e293b;
+      --accent-soft: #1d4ed8;
       --text: #e5e7eb;
       --muted: #9ca3af;
       --radius: 18px;
@@ -23,345 +23,245 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1d4ed8 0, #020617 48%);
-      color: var(--text);
       min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #1d4ed8 0, #020617 55%),
+        #020617;
+      color: var(--text);
       display: flex;
-      align-items: stretch;
+      align-items: center;
       justify-content: center;
       padding: 24px;
     }
 
     .shell {
-      max-width: 1120px;
+      max-width: 960px;
       width: 100%;
-      background: radial-gradient(circle at top left, #111827, #020617 55%);
-      border-radius: var(--radius);
-      box-shadow: 0 24px 60px rgba(15,23,42,0.8);
-      border: 1px solid rgba(148,163,184,0.4);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      background: radial-gradient(circle at top left, #020617, #020617 60%);
+      border-radius: 28px;
+      border: 1px solid rgba(148,163,184,0.35);
+      box-shadow: 0 32px 80px rgba(15,23,42,0.9);
+      padding: 32px 30px 28px;
     }
 
-    .top {
-      padding: 18px 20px;
-      border-bottom: 1px solid #111827;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
+    .header {
+      margin-bottom: 26px;
     }
 
-    .title-block {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .title {
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.06em;
+    .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #c7d2fe;
-    }
-
-    .subtitle {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .btn-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      background: rgba(15,23,42,0.9);
-      color: var(--muted);
-      font-size: 0.85rem;
-      padding: 7px 14px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
-    }
-
-    .tab-btn span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: rgba(148,163,184,0.7);
-    }
-
-    .tab-btn.active {
-      border-color: var(--accent);
-      background: linear-gradient(135deg, #1d4ed8, #2563eb);
-      color: #e5edff;
-      box-shadow: 0 12px 26px rgba(37,99,235,0.55);
-    }
-
-    .tab-btn.active span.dot {
-      background: #bbf7d0;
-    }
-
-    .main {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 2fr);
-      gap: 0;
-      min-height: 520px;
-    }
-
-    .side {
-      padding: 18px 18px 18px 20px;
-      border-right: 1px solid #111827;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 70%);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .side h2 {
-      font-size: 1.05rem;
+      color: #9ca3af;
       margin-bottom: 8px;
     }
 
-    .side p {
-      font-size: 0.88rem;
+    .title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
       color: var(--muted);
-      margin-bottom: 10px;
+      max-width: 540px;
     }
 
-    .site-meta {
-      font-size: 0.83rem;
-      color: #9ca3af;
+    .grid {
       display: grid;
-      gap: 4px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 10px;
     }
 
-    .meta-label {
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 0.7rem;
-      color: #6b7280;
+    .preview-card {
+      position: relative;
+      padding: 22px 20px 20px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, #0f172a, #020617 70%);
+      border: 1px solid rgba(148,163,184,0.4);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
 
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
+    .preview-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(37,99,235,0.25), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      pointer-events: none;
+    }
+
+    .preview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 26px 60px rgba(15,23,42,0.9);
+      border-color: rgba(96,165,250,0.9);
+      background: radial-gradient(circle at top left, #020617, #020617 70%);
+    }
+
+    .preview-card:hover::after {
+      opacity: 1;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
       gap: 6px;
-      margin-top: 6px;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      padding: 3px 9px;
+      font-size: 0.78rem;
+      padding: 4px 11px;
       border-radius: 999px;
-      border: 1px solid #1d4ed8;
+      border: 1px solid rgba(148,163,184,0.6);
       color: #c7d2fe;
+      margin-bottom: 12px;
       background: rgba(15,23,42,0.9);
     }
 
-    .preview {
-      background: #020617;
-      position: relative;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      background: #ffffff;
-    }
-
-    .preview-label {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      z-index: 2;
-      font-size: 0.75rem;
-      padding: 4px 9px;
+    .pill-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.8);
-      color: #e5edff;
-      border: 1px solid rgba(148,163,184,0.7);
+      background: #22c55e;
     }
 
-    .bottom {
-      padding: 10px 16px;
-      border-top: 1px solid #111827;
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card-role {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .cta-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      color: #bfdbfe;
+      margin-top: 4px;
+    }
+
+    .cta-arrow {
+      font-size: 1.05rem;
+      transition: transform 0.18s ease;
+    }
+
+    .preview-card:hover .cta-arrow {
+      transform: translateX(4px);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(51,65,85,0.9);
+      color: #9ca3af;
+    }
+
+    .footer-note {
+      margin-top: 18px;
       font-size: 0.78rem;
       color: #6b7280;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
     }
 
-    a.inline-link {
-      color: #93c5fd;
-    }
-
-    a.inline-link:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 900px) {
-      .main {
+    @media (max-width: 720px) {
+      .shell {
+        padding: 22px 18px 20px;
+      }
+      .grid {
         grid-template-columns: minmax(0, 1fr);
-        min-height: 460px;
       }
-      .side {
-        border-right: none;
-        border-bottom: 1px solid #111827;
-      }
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 14px;
-      }
-      .top {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .btn-row {
-        width: 100%;
-      }
-      .btn-row .tab-btn {
-        flex: 1 1 auto;
-        justify-content: center;
+      .title {
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <header class="top">
-      <div class="title-block">
-        <div class="title">Project preview</div>
-        <div class="subtitle">
-          Toggle between two live sites and view them in one place.
-        </div>
-      </div>
-      <div class="btn-row">
-        <button class="tab-btn active" data-site="site1">
-          <span class="dot"></span>
-          Seamless POC
-        </button>
-        <button class="tab-btn" data-site="site2">
-          <span class="dot"></span>
-          Other site
-        </button>
-      </div>
+  <main class="shell">
+    <header class="header">
+      <div class="eyebrow">Seamless POC · Concept review</div>
+      <h1 class="title">Choose a preview to open full-screen.</h1>
+      <p class="subtitle">
+        Each button opens a live page, exactly as a visitor would see it. Use this hub to compare concepts side by side.
+      </p>
     </header>
 
-    <div class="main">
-      <aside class="side">
-        <div>
-          <h2 id="site-title">Seamless POC landing page</h2>
-          <p id="site-desc">
-            Modern healthcare IT integration page, focused on point of care hardware, clean workspaces, and clinical workflow.
-          </p>
-          <div class="site-meta">
-            <div>
-              <div class="meta-label">Focus</div>
-              <div id="site-focus">Healthcare IT, installs, lifecycle</div>
-            </div>
-            <div>
-              <div class="meta-label">Tech</div>
-              <div id="site-tech">Static HTML, CSS only, GitHub Pages ready</div>
-            </div>
-          </div>
-          <div class="badge-row">
-            <span class="badge" id="site-badge-1">Clinical friendly</span>
-            <span class="badge" id="site-badge-2">Blue and white palette</span>
-          </div>
+    <section class="grid">
+      <!-- PREVIEW 1 -->
+      <a class="preview-card" href="seamless.html">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Preview 1 · Seamless POC
         </div>
-      </aside>
+        <div class="card-role">Primary concept</div>
+        <div class="card-title">Modern healthcare IT landing page</div>
+        <p class="card-text">
+          Blue-and-white clinical aesthetic, focused messaging around installs, workflow, and better care outcomes.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Healthcare IT integration</span>
+          <span class="tag">Modern UI</span>
+          <span class="tag">Point of care</span>
+        </div>
+        <div class="cta-row">
+          <span>Open Preview 1</span>
+          <span class="cta-arrow">↗</span>
+        </div>
+      </a>
 
-      <section class="preview">
-        <div class="preview-label" id="preview-label">Preview, Seamless POC</div>
-        <!-- Change the src values in JS below to your two URLs or file names -->
-        <iframe id="preview-frame" src=""></iframe>
-      </section>
-    </div>
+      <!-- PREVIEW 2 -->
+      <a class="preview-card" href="other-site.html">
+        <div class="pill">
+          <span class="pill-dot" style="background:#facc15;"></span>
+          Preview 2 · Alternate concept
+        </div>
+        <div class="card-role">Comparison concept</div>
+        <div class="card-title">Second layout / brand direction</div>
+        <p class="card-text">
+          Use this space for an alternate layout, visual style, or messaging approach to compare against the primary page.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Alternate design</span>
+          <span class="tag">Message test</span>
+          <span class="tag">Client review</span>
+        </div>
+        <div class="cta-row">
+          <span>Open Preview 2</span>
+          <span class="cta-arrow">↗</span>
+        </div>
+      </a>
+    </section>
 
-    <footer class="bottom">
-      <span>
-        Tip, you can host this file and both sites in the same GitHub Pages repo
-      </span>
-      <span>
-        Edit the URLs inside the script tag to point to your pages
-      </span>
-    </footer>
-  </div>
-
-  <script>
-    // EDIT THESE TO YOUR LIVE SITES OR LOCAL FILES
-    const SITE_DATA = {
-      site1: {
-        url: "seamless.html", // example, change to your Seamless page
-        title: "Seamless POC landing page",
-        desc: "Modern healthcare IT integration page, focused on point of care hardware, clean workspaces, and clinical workflow.",
-        focus: "Healthcare IT, installs, lifecycle",
-        badge1: "Clinical friendly",
-        badge2: "Blue and white palette",
-        label: "Preview, Seamless POC"
-      },
-      site2: {
-        url: "other-site.html", // example, change to your second page
-        title: "Second site preview",
-        desc: "Your second concept, for example Chapel & Vale, Celnu, or any other landing page you are testing.",
-        focus: "Brand concept, marketing, or demo layout",
-        badge1: "Concept design",
-        badge2: "Live preview",
-        label: "Preview, second site"
-      }
-    };
-
-    const buttons = document.querySelectorAll(".tab-btn");
-    const frame = document.getElementById("preview-frame");
-
-    const titleEl = document.getElementById("site-title");
-    const descEl = document.getElementById("site-desc");
-    const focusEl = document.getElementById("site-focus");
-    const badge1El = document.getElementById("site-badge-1");
-    const badge2El = document.getElementById("site-badge-2");
-    const labelEl = document.getElementById("preview-label");
-
-    function loadSite(key) {
-      const data = SITE_DATA[key];
-      if (!data) return;
-
-      frame.src = data.url;
-      titleEl.textContent = data.title;
-      descEl.textContent = data.desc;
-      focusEl.textContent = data.focus;
-      badge1El.textContent = data.badge1;
-      badge2El.textContent = data.badge2;
-      labelEl.textContent = data.label;
-
-      buttons.forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.site === key);
-      });
-    }
-
-    // default
-    loadSite("site1");
-
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const key = btn.dataset.site;
-        loadSite(key);
-      });
-    });
-  </script>
+    <p class="footer-note">
+      Tip: send this URL to your client. They can click a preview, explore it normally, then hit back to return here.
+    </p>
+  </main>
 </body>
 </html>
