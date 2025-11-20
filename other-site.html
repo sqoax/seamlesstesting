@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -797,7 +796,49 @@
 
     .footer-meta strong { color: #e5edff; }
 
-    @media (max-width: 960px) {
+    /* LOGO STRIP STYLES ADDED HERE */
+    .logo-section {
+      padding: 50px 0;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+      text-align: center;
+    }
+
+    .logo-header {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #94a3b8;
+      margin-bottom: 30px;
+    }
+
+    .logo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px 60px;
+    }
+
+    .client-logo {
+      height: 45px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    .client-logo:hover {
+      filter: grayscale(0%);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .client-logo { height: 35px; }
+      .logo-grid { gap: 30px; }
       .nav-links { display: none; }
       .hero-grid,
       .feature-grid,
@@ -823,7 +864,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="container nav">
       <div class="logo">
@@ -851,7 +891,6 @@
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="hero">
       <div class="container hero-grid">
         <div>
@@ -884,127 +923,122 @@
 
         <div>
           <div class="hero-card" aria-hidden="true">
-  <div style="margin-bottom:14px;">
-    <div class="hero-pill">How Seamless Operates</div>
-    <div style="font-size:0.82rem;color:#6b7280;margin-top:4px;">
-      The physical layer of healthcare IT, delivered with precision.
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr;gap:18px;margin-top:6px;">
-
-    <!-- STEP 1 -->
-    <div style="
-      display:flex;
-      align-items:flex-start;
-      gap:14px;
-      padding:14px 12px;
-      border-radius:14px;
-      background:#f8fafc;
-      border:1px solid #e2e8f0;
-    ">
-      <div style="
-        width:36px;
-        height:36px;
-        border-radius:12px;
-        background:#eff6ff;
-        color:#2563eb;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-weight:700;
-        font-size:1rem;
-      ">1</div>
-
-      <div>
-        <div style="font-weight:700;color:#1e293b;font-size:1rem;">Evaluate</div>
-        <div style="font-size:0.9rem;color:#64748b;">
-          Walkthroughs, measurements, workflow conversations, hardware recommendations.
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 2 -->
-    <div style="
-      display:flex;
-      align-items:flex-start;
-      gap:14px;
-      padding:14px 12px;
-      border-radius:14px;
-      background:#f0f7ff;
-      border:1px solid #dbeafe;
-    ">
-      <div style="
-        width:36px;
-        height:36px;
-        border-radius:12px;
-        background:#dbeafe;
-        color:#1d4ed8;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-weight:700;
-        font-size:1rem;
-      ">2</div>
-
-      <div>
-        <div style="font-weight:700;color:#1e293b;font-size:1rem;">Install</div>
-        <div style="font-size:0.9rem;color:#64748b;">
-          Quiet, respectful technicians. Clean cabling, clinical-ready rooms, zero dangling cords.
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 3 -->
-    <div style="
-      display:flex;
-      align-items:flex-start;
-      gap:14px;
-      padding:14px 12px;
-      border-radius:14px;
-      background:#eefdf4;
-      border:1px solid #bbf7d0;
-    ">
-      <div style="
-        width:36px;
-        height:36px;
-        border-radius:12px;
-        background:#bbf7d0;
-        color:#15803d;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-weight:700;
-        font-size:1rem;
-      ">3</div>
-
-      <div>
-        <div style="font-weight:700;color:#1e293b;font-size:1rem;">Support</div>
-        <div style="font-size:0.9rem;color:#64748b;">
-          Adjustments, maintenance, lifecycle work, and future expansion planning.
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="margin-top:16px;text-align:center;font-size:0.82rem;color:#64748b;">
-    Your rooms. Cleaner, safer, and ready for care.
-  </div>
-</div>
-
-            <div class="hero-footnote">
-              <div>
-                <span class="hero-tagline-pill">Seamless Technicians</span>
-Quiet, respectful installs, full clean up, no dangling cords.
+            <div style="margin-bottom:14px;">
+              <div class="hero-pill">How Seamless Operates</div>
+              <div style="font-size:0.82rem;color:#6b7280;margin-top:4px;">
+                The physical layer of healthcare IT, delivered with precision.
               </div>
-              <div>Eval, design, install, and lifecycle support.</div>
             </div>
+
+            <div style="display:grid;grid-template-columns:1fr;gap:18px;margin-top:6px;">
+
+              <div style="
+                display:flex;
+                align-items:flex-start;
+                gap:14px;
+                padding:14px 12px;
+                border-radius:14px;
+                background:#f8fafc;
+                border:1px solid #e2e8f0;
+              ">
+                <div style="
+                  width:36px;
+                  height:36px;
+                  border-radius:12px;
+                  background:#eff6ff;
+                  color:#2563eb;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-weight:700;
+                  font-size:1rem;
+                ">1</div>
+
+                <div>
+                  <div style="font-weight:700;color:#1e293b;font-size:1rem;">Evaluate</div>
+                  <div style="font-size:0.9rem;color:#64748b;">
+                    Walkthroughs, measurements, workflow conversations, hardware recommendations.
+                  </div>
+                </div>
+              </div>
+
+              <div style="
+                display:flex;
+                align-items:flex-start;
+                gap:14px;
+                padding:14px 12px;
+                border-radius:14px;
+                background:#f0f7ff;
+                border:1px solid #dbeafe;
+              ">
+                <div style="
+                  width:36px;
+                  height:36px;
+                  border-radius:12px;
+                  background:#dbeafe;
+                  color:#1d4ed8;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-weight:700;
+                  font-size:1rem;
+                ">2</div>
+
+                <div>
+                  <div style="font-weight:700;color:#1e293b;font-size:1rem;">Install</div>
+                  <div style="font-size:0.9rem;color:#64748b;">
+                    Quiet, respectful technicians. Clean cabling, clinical-ready rooms, zero dangling cords.
+                  </div>
+                </div>
+              </div>
+
+              <div style="
+                display:flex;
+                align-items:flex-start;
+                gap:14px;
+                padding:14px 12px;
+                border-radius:14px;
+                background:#eefdf4;
+                border:1px solid #bbf7d0;
+              ">
+                <div style="
+                  width:36px;
+                  height:36px;
+                  border-radius:12px;
+                  background:#bbf7d0;
+                  color:#15803d;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-weight:700;
+                  font-size:1rem;
+                ">3</div>
+
+                <div>
+                  <div style="font-weight:700;color:#1e293b;font-size:1rem;">Support</div>
+                  <div style="font-size:0.9rem;color:#64748b;">
+                    Adjustments, maintenance, lifecycle work, and future expansion planning.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div style="margin-top:16px;text-align:center;font-size:0.82rem;color:#64748b;">
+              Your rooms. Cleaner, safer, and ready for care.
+            </div>
+          </div>
+
+          <div class="hero-footnote">
+            <div>
+              <span class="hero-tagline-pill">Seamless Technicians</span>
+              Quiet, respectful installs, full clean up, no dangling cords.
+            </div>
+            <div>Eval, design, install, and lifecycle support.</div>
           </div>
         </div>
       </div>
 
-      <!-- STATS -->
       <div class="container stats">
         <div class="stats-bar">
           <div>
@@ -1026,7 +1060,22 @@ Quiet, respectful installs, full clean up, no dangling cords.
       </div>
     </section>
 
-    <!-- SERVICES -->
+    <section class="logo-section">
+      <div class="container">
+        <p class="logo-header">Trusted by leading health systems</p>
+        
+        <div class="logo-grid">
+          <img src="logos/healthsystem-a.png" alt="Health System A" class="client-logo">
+          
+          <img src="logos/medical-center-b.png" alt="Medical Center B" class="client-logo">
+          
+          <img src="logos/clinic-network-c.png" alt="Clinic Network C" class="client-logo">
+          
+          <img src="logos/regional-hospital-d.png" alt="Regional Hospital D" class="client-logo">
+        </div>
+      </div>
+    </section>
+
     <section id="services" class="section">
       <div class="container">
         <div class="section-header">
@@ -1168,7 +1217,6 @@ Quiet, respectful installs, full clean up, no dangling cords.
       </div>
     </section>
 
-    <!-- PROCUREMENT / SOLUTION FINDING + PROCESS -->
     <section id="procurement" class="section feature-section">
       <div class="container">
         <div class="feature-grid">
@@ -1307,7 +1355,6 @@ Quiet, respectful installs, full clean up, no dangling cords.
       </div>
     </section>
 
-    <!-- TESTIMONIALS -->
     <section id="testimonials" class="section testimonial-section">
       <div class="container">
         <div class="section-header" style="margin-bottom:30px;">
@@ -1367,7 +1414,6 @@ Quiet, respectful installs, full clean up, no dangling cords.
       </div>
     </section>
 
-    <!-- CTA / CONTACT -->
     <section id="contact" class="section cta-shell">
       <div class="container">
         <div class="cta-inner">
@@ -1413,7 +1459,6 @@ Quiet, respectful installs, full clean up, no dangling cords.
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-grid">
