@@ -397,6 +397,60 @@
       max-width: 640px;
       margin: 0 auto 40px;
     }
+    
+    /* Logo strip */
+    .logo-strip {
+      padding: 26px 0 12px;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo-strip-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .logo-strip-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .logo-strip-logos {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      opacity: 0.8;
+    }
+
+    .logo-strip-logos img {
+      height: 26px;
+      max-width: 140px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.8;
+      transition: opacity 0.18s ease, filter 0.18s ease, transform 0.18s ease;
+    }
+
+    .logo-strip-logos img:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 720px) {
+      .logo-strip-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
 
     /* Services */
     .services-grid {
@@ -1004,24 +1058,23 @@ Quiet, respectful installs, full clean up, no dangling cords.
         </div>
       </div>
 
-      <!-- STATS -->
+            <!-- STATS -->
       <div class="container stats">
         <div class="stats-bar">
-          <div>
-            <div class="stat-label">Experience</div>
-            <div class="stat-number">20+ years</div>
-            <div class="stat-note">Point of care hardware, clinical workflow, and cable management.</div>
-          </div>
-          <div>
-            <div class="stat-label">Install volume</div>
-            <div class="stat-number">1,000s</div>
-            <div class="stat-note">Workstations, carts, tracking boards, and clinical mounts installed.</div>
-          </div>
-          <div>
-            <div class="stat-label">Healthcare focus</div>
-            <div class="stat-number">100%</div>
-            <div class="stat-note">Hospitals, IDNs, and clinics, no generic commercial work.</div>
-          </div>
+          ...
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO STRIP -->
+    <section class="logo-strip">
+      <div class="container logo-strip-inner">
+        <span class="logo-strip-label">Trusted by teams at</span>
+        <div class="logo-strip-logos">
+          <img src="logos/healthsystem-a.svg" alt="Health System A logo" />
+          <img src="logos/medical-center-b.svg" alt="Medical Center B logo" />
+          <img src="logos/clinic-network-c.svg" alt="Clinic Network C logo" />
+          <img src="logos/regional-hospital-d.svg" alt="Regional Hospital D logo" />
         </div>
       </div>
     </section>
