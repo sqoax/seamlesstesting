@@ -135,6 +135,15 @@
     h3 { font-size: 1.35rem; margin-bottom: 0.6rem; }
     p { font-size: 1rem; color: var(--text-gray); margin-bottom: 1.1rem; }
 
+    /* Make anchored sections stop *below* the sticky header */
+#services,
+#procurement,
+#process,
+#testimonials,
+#contact {
+  scroll-margin-top: 96px;  /* tweak 80–120px until it feels perfect */
+}
+
     /* Header */
     header {
       position: sticky;
