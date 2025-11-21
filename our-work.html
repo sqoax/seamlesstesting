@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Work | Seamless Point of Care</title>
+  <meta name="description" content="See how Seamless Point of Care designs, installs, and supports bedside workstations, anesthesia carts, digital signage, and more in real clinical environments." />
+  
+  <style>
+    /* --- 1. Variables & Design System --- */
+    :root {
+      /* Color Palette (Modern Slate/Blue) */
+      --color-primary: #2563eb;      /* Blue 600 */
+      --color-primary-dark: #1d4ed8; /* Blue 700 */
+      --color-primary-light: #eff6ff;/* Blue 50 */
+      
+      --color-text-main: #0f172a;    /* Slate 900 */
+      --color-text-body: #475569;    /* Slate 600 */
+      --color-text-muted: #94a3b8;   /* Slate 400 */
+      
+      --color-bg-white: #ffffff;
+      --color-bg-soft: #f8fafc;      /* Slate 50 */
+      --color-bg-dark: #020617;      /* Slate 950 */
+      
+      --color-border: #e2e8f0;       /* Slate 200 */
+      --color-success: #16a34a;      /* Green 600 */
+      --color-success-bg: #f0fdf4;   /* Green 50 */
+
+      /* Spacing & Layout */
+      --container-width: 1140px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-full: 9999px;
+      
+      /* Shadows (Tailwind-esque) */
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+
+      /* Transitions */
+      --ease-spring: cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* --- 2. Reset & Base --- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px; 
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--color-text-main);
+      background-color: var(--color-bg-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { text-decoration: none; color: inherit; transition: color 0.2s ease; }
+    ul { list-style: none; }
+    img, svg { display: block; max-width: 100%; }
+    button, input, textarea { font-family: inherit; }
+
+    /* --- 3. Typography --- */
+    h1, h2, h3, h4 {
+      color: var(--color-text-main);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); margin-bottom: 1.25rem; }
+    h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; margin-bottom: 0.5rem; font-weight: 700; }
+    
+    p {
+      color: var(--color-text-body);
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+
+    /* --- 4. Utility Components --- */
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section { padding: 96px 0; }
+    .section-sm { padding: 64px 0; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: currentColor;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-spring);
+      border: 1px solid transparent;
+      background: transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: white;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-primary);
+      border-color: rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-outline:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+    }
+
+    /* --- 5. Header --- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--color-text-main);
+      letter-spacing: -0.03em;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #60a5fa, var(--color-primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a:not(.btn) {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--color-text-body);
+    }
+
+    .nav-links a:not(.btn):hover { color: var(--color-primary); }
+
+    .nav-links .nav-active {
+      color: var(--color-primary);
+      font-weight: 600;
+      position: relative;
+    }
+
+    .nav-links .nav-active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #60a5fa, var(--color-primary));
+    }
+
+    /* --- 6. Base grids/cards reused --- */
+    .bg-soft { background-color: var(--color-bg-soft); }
+
+    .section-header {
+      max-width: 720px;
+      margin: 0 auto 48px;
+      text-align: left;
+    }
+
+    .section-header.centered {
+      text-align: center;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .card-overline {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .metric-label { 
+      font-size: 0.75rem; 
+      color: var(--color-text-muted); 
+      text-transform: uppercase; 
+      letter-spacing: 0.05em; 
+    }
+    .metric-data { 
+      font-weight: 700; 
+      color: var(--color-text-main); 
+      font-size: 0.95rem; 
+    }
+
+    /* --- 7. Our Work Specific Styles --- */
+
+    .ourwork-hero {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(239, 246, 255, 0.9) 0%, transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(240, 253, 244, 0.7) 0%, transparent 55%);
+      padding-top: 72px;
+      padding-bottom: 64px;
+    }
+
+    .ourwork-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .project-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-start;
+    }
+
+    .project-chip {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--color-text-body);
+      background: rgba(248, 250, 252, 0.9);
+      backdrop-filter: blur(4px);
+    }
+
+    .project-chip span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .project-chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--color-primary);
+    }
+
+    .ourwork-panel {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .ourwork-panel-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+    }
+
+    .ourwork-panel-body {
+      font-size: 0.95rem;
+      color: var(--color-text-body);
+    }
+
+    .ourwork-panel-list {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--color-text-body);
+    }
+
+    .ourwork-panel-list li {
+      margin-bottom: 6px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .ourwork-panel-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      top: -1px;
+      color: var(--color-primary);
+    }
+
+    /* Filter bar */
+    .filter-section {
+      padding: 24px 0 8px;
+      border-bottom: 1px solid var(--color-border);
+      background: rgba(255, 255, 255, 0.9);
+      position: sticky;
+      top: 80px;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--color-text-muted);
+      margin-right: 4px;
+    }
+
+    .filter-chip {
+      border-radius: var(--radius-full);
+      border: 1px solid #cbd5e1;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: white;
+      color: var(--color-text-body);
+      cursor: pointer;
+      transition: all 0.18s var(--ease-spring);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+    }
+
+    .filter-chip.active {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .filter-chip.active .filter-dot {
+      background: rgba(239, 246, 255, 1);
+    }
+
+    /* Projects grid */
+    .projects-section {
+      padding-top: 48px;
+      padding-bottom: 96px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s var(--ease-spring), border-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .project-header {
+      margin-bottom: 16px;
+    }
+
+    .project-subtitle {
+      font-size: 0.9rem;
+      color: var(--color-text-body);
+      margin-bottom: 0.75rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--color-bg-soft);
+      color: var(--color-text-muted);
+    }
+
+    .project-image-placeholder {
+      border-radius: 16px;
+      border: 1px dashed #cbd5e1;
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image-placeholder span {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .project-metrics {
+      margin-top: 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--color-bg-soft);
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+
+    .project-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .project-expand-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-primary);
+    }
+
+    .project-expand-toggle svg {
+      transition: transform 0.2s var(--ease-spring);
+    }
+
+    .project-card.expanded .project-expand-toggle svg {
+      transform: rotate(180deg);
+    }
+
+    .project-expand {
+      margin-top: 0;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.25s var(--ease-spring), opacity 0.22s ease, margin-top 0.22s ease;
+    }
+
+    .project-card.expanded .project-expand {
+      margin-top: 16px;
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    .project-expand-inner {
+      border-radius: 16px;
+      background: #f8fafc;
+      padding: 16px 16px 18px;
+      border: 1px solid #e2e8f0;
+      font-size: 0.9rem;
+      color: var(--color-text-body);
+    }
+
+    .project-expand-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 16px;
+    }
+
+    .project-expand-heading {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--color-text-muted);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .project-expand-text {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .project-expand-list {
+      margin-left: 16px;
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+
+    .project-expand-list li {
+      margin-bottom: 4px;
+    }
+
+    .project-image-small-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .project-image-small-placeholder {
+      border-radius: 12px;
+      border: 1px dashed #cbd5e1;
+      background: #e5e7eb;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-align: center;
+      padding: 8px;
+    }
+
+    .project-note {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-top: 8px;
+    }
+
+    /* --- 8. Footer (simple reuse) --- */
+    footer {
+      background: var(--color-bg-dark);
+      color: var(--color-text-muted);
+      padding: 56px 0 28px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .footer-brand .logo-text { 
+      color: white; 
+      font-weight: 700; 
+      font-size: 1.1rem; 
+      display: block; 
+      margin-top: 12px; 
+    }
+    
+    .footer-col h4 { 
+      color: white; 
+      font-size: 0.85rem; 
+      text-transform: uppercase; 
+      letter-spacing: 0.1em; 
+      margin-bottom: 16px; 
+    }
+
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a:hover { color: white; text-decoration: underline; }
+
+    .footer-bottom {
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.85rem;
+    }
+
+    .footer-copy {
+      color: #64748b;
+    }
+
+    /* --- 9. Responsive Breakpoints --- */
+    @media (max-width: 992px) {
+      .ourwork-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.35rem; }
+      .section { padding: 72px 0; }
+      .container { padding: 0 20px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-expand-grid { grid-template-columns: 1fr; }
+      .filter-section {
+        top: 72px;
+      }
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h10M4 18h8" />
+          </svg>
+        </div>
+        <span>Seamless<span style="color:var(--color-primary)">POC</span></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html#proof">Results</a></li>
+          <li><a href="our-work.html" class="nav-active">Our Work</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#process">Process</a></li>
+          <li><a href="index.html#contact" class="btn btn-primary">15-Minute Assessment</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Our Work Hero -->
+    <section class="section ourwork-hero">
+      <div class="container">
+        <div class="ourwork-layout">
+          <div>
+            <div class="badge">
+              <span class="badge-dot"></span>
+              Our Work
+            </div>
+            <h1>What Seamless looks like in the field.</h1>
+            <p>
+              These are real-world projects in ICUs, ORs, L&amp;D units, and ambulatory clinics&mdash;
+              where hardware, cabling, and workflow all have to align to keep care moving.
+            </p>
+            <p style="font-size:0.95rem; color:var(--color-text-muted); max-width:30rem;">
+              Each card below represents a rollout, retrofit, or standardization effort. 
+              Click any project to see how we approached the work, where installs happened, 
+              and how clinicians responded.
+            </p>
+            <div style="margin-top:24px;">
+              <a href="#projects" class="btn btn-outline">Browse projects</a>
+            </div>
+          </div>
+
+          <aside class="ourwork-panel">
+            <div class="ourwork-panel-title">Common environments</div>
+            <div class="ourwork-panel-body">
+              <p style="margin-bottom:10px;">
+                We specialize in live clinical areas where downtime and clutter aren’t an option.
+              </p>
+              <ul class="ourwork-panel-list">
+                <li>Bedside EMR in ICU, step-down, and med-surg</li>
+                <li>Anesthesia carts and perioperative workstations</li>
+                <li>Ambulatory clinics and registration desks</li>
+                <li>Digital signage, tracking boards, and wayfinding</li>
+              </ul>
+              <div style="margin-top:18px;" class="project-chips">
+                <div class="project-chip"><span><span class="project-chip-dot"></span>Bedside EMR</span></div>
+                <div class="project-chip"><span><span class="project-chip-dot"></span>OR &amp; Anesthesia</span></div>
+                <div class="project-chip"><span><span class="project-chip-dot"></span>L&amp;D &amp; Fetal Monitoring</span></div>
+                <div class="project-chip"><span><span class="project-chip-dot"></span>Digital Signage</span></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="filter-section">
+      <div class="container">
+        <div class="filter-bar">
+          <span class="filter-label">Filter by setting</span>
+          <button class="filter-chip active" data-filter="all">
+            <span class="filter-dot"></span>All work
+          </button>
+          <button class="filter-chip" data-filter="bedside">
+            <span class="filter-dot"></span>Bedside EMR
+          </button>
+          <button class="filter-chip" data-filter="cable">
+            <span class="filter-dot"></span>Cable &amp; desktops
+          </button>
+          <button class="filter-chip" data-filter="or">
+            <span class="filter-dot"></span>OR / Anesthesia
+          </button>
+          <button class="filter-chip" data-filter="ambulatory">
+            <span class="filter-dot"></span>Ambulatory
+          </button>
+          <button class="filter-chip" data-filter="ld">
+            <span class="filter-dot"></span>L&amp;D
+          </button>
+          <button class="filter-chip" data-filter="signage">
+            <span class="filter-dot"></span>Digital signage
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section id="projects" class="projects-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Representative projects and rollouts.</h2>
+          <p style="max-width:640px;">
+            Every environment has different constraints&mdash;infection control, space, routing, 
+            clinician workflow. These examples show how we standardize hardware and cable management
+            without turning a hospital into a construction site.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: Bedside EMR Inpatient -->
+          <article class="card project-card" data-category="bedside inpatient infection">
+            <div class="project-header">
+              <span class="card-overline">Bedside EMR · Inpatient</span>
+              <h3>Standardized bedside workstations in active units</h3>
+              <p class="project-subtitle">
+                Wall-mounted EMR workstations and scanners aligned to bedside workflow in
+                live med-surg and ICU rooms.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Bedside EMR</span>
+                <span class="project-tag">Articulating arms</span>
+                <span class="project-tag">Infection control</span>
+              </div>
+            </div>
+
+            <div class="project-image-placeholder">
+              <span>Photo placeholder &mdash; Bedside EMR workstation in patient room</span>
+            </div>
+
+            <div class="project-metrics">
+              <div>
+                <div class="metric-label">Scope</div>
+                <div class="metric-data">Multi-unit rollout</div>
+              </div>
+              <div>
+                <div class="metric-label">Environment</div>
+                <div class="metric-data">Active ICU &amp; step-down</div>
+              </div>
+              <div>
+                <div class="metric-label">Outcome</div>
+                <div class="metric-data" style="color:var(--color-success);">Clinician-approved layouts</div>
+              </div>
+              <div>
+                <div class="metric-label">Work Window</div>
+                <div class="metric-data">Evenings/weekends</div>
+              </div>
+            </div>
+
+            <div class="project-footer-row">
+              <span>Bedside EMR · In-room mounting</span>
+              <button type="button" class="project-expand-toggle">
+                <span>View details</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-expand">
+              <div class="project-expand-inner">
+                <div class="project-expand-grid">
+                  <div>
+                    <div class="project-expand-heading">The challenge</div>
+                    <p class="project-expand-text">
+                      Real-time charting and bedside bar code scanning needed to happen in the room 
+                      without breaking eye contact or creating tripping hazards. Most rooms had 
+                      limited wall space and legacy power locations.
+                    </p>
+                    <div class="project-expand-heading">The Seamless approach</div>
+                    <ul class="project-expand-list">
+                      <li>Room-by-room survey of wall, headwall, and footwall mounting options.</li>
+                      <li>Standardized articulating arms with low-profile stow, sized to each room type.</li>
+                      <li>Scanner brackets and cable paths planned to keep surfaces cleanable.</li>
+                      <li>Installs completed in off-peak hours with rooms returned in clinical-ready condition.</li>
+                    </ul>
+                    <div class="project-expand-heading" style="margin-top:10px;">Outcome</div>
+                    <p class="project-expand-text">
+                      Clinicians can chart, scan, and interact with patients in a single motion. 
+                      Cables stay out of the way and infection control teams get fully wipeable surfaces.
+                    </p>
+                  </div>
+                  <div>
+                    <div class="project-image-small-grid">
+                      <div class="project-image-small-placeholder">
+                        Before photo placeholder &mdash; ad-hoc workstation
+                      </div>
+                      <div class="project-image-small-placeholder">
+                        After photo placeholder &mdash; standardized arm and scanner
+                      </div>
+                    </div>
+                    <p class="project-note">
+                      Replace placeholders with bedside workstation before/after photos from any unit you want to highlight.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Ambulatory Cable Management / Seamless Desktop -->
+          <article class="card project-card" data-category="cable ambulatory">
+            <div class="project-header">
+              <span class="card-overline">Cable Management · Ambulatory</span>
+              <h3>Clean registration desks and lobbies</h3>
+              <p class="project-subtitle">
+                Reworked cabling and desktop hardware in a high-traffic registration area so patients
+                see a welcoming space, not a tangle of cords.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Seamless Desktop</span>
+                <span class="project-tag">Patient perception</span>
+                <span class="project-tag">Front-of-house</span>
+              </div>
+            </div>
+
+            <div class="project-image-placeholder">
+              <span>Photo placeholder &mdash; Registration desk desktop cabling</span>
+            </div>
+
+            <div class="project-metrics">
+              <div>
+                <div class="metric-label">Scope</div>
+                <div class="metric-data">Multi-station rework</div>
+              </div>
+              <div>
+                <div class="metric-label">Setting</div>
+                <div class="metric-data">Ambulatory registration</div>
+              </div>
+              <div>
+                <div class="metric-label">Outcome</div>
+                <div class="metric-data" style="color:var(--color-success);">Streamlined visuals</div>
+              </div>
+              <div>
+                <div class="metric-label">Focus</div>
+                <div class="metric-data">Aesthetics &amp; cleaning</div>
+              </div>
+            </div>
+
+            <div class="project-footer-row">
+              <span>Seamless Desktop &mdash; Patient-facing areas</span>
+              <button type="button" class="project-expand-toggle">
+                <span>View details</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-expand">
+              <div class="project-expand-inner">
+                <div class="project-expand-grid">
+                  <div>
+                    <div class="project-expand-heading">The challenge</div>
+                    <p class="project-expand-text">
+                      Registration desks sat in full view of patients. Over time, cables, adapters, 
+                      and small devices turned into a visible “spider web” that trapped dust and 
+                      made cleaning difficult.
+                    </p>
+                    <div class="project-expand-heading">The Seamless approach</div>
+                    <ul class="project-expand-list">
+                      <li>Documented every device, cable, and power requirement at each station.</li>
+                      <li>Introduced under-surface routing, raceways, and right-sized cable lengths.</li>
+                      <li>Repositioned equipment so environmental services could fully wipe surfaces.</li>
+                      <li>Standardized layouts so new staff know exactly where equipment lives.</li>
+                    </ul>
+                    <div class="project-expand-heading" style="margin-top:10px;">Outcome</div>
+                    <p class="project-expand-text">
+                      Patients now see clean, open work surfaces. Staff can clean in minutes, and 
+                      IT can service equipment without fighting a knot of cords.
+                    </p>
+                  </div>
+                  <div>
+                    <div class="project-image-small-grid">
+                      <div class="project-image-small-placeholder">
+                        Before photo placeholder &mdash; visible cabling and dust
+                      </div>
+                      <div class="project-image-small-placeholder">
+                        After photo placeholder &mdash; streamlined Seamless Desktop
+                      </div>
+                    </div>
+                    <p class="project-note">
+                      Ideal place to show a side-by-side registration desk transformation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: Creating Work Space in Older Facilities -->
+          <article class="card project-card" data-category="bedside workspace inpatient">
+            <div class="project-header">
+              <span class="card-overline">Retrofit · Legacy Facilities</span>
+              <h3>Creating workstations “out of thin air”</h3>
+              <p class="project-subtitle">
+                Added compact work surfaces and EMR access in older rooms that were never designed
+                for computers at the point of care.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Articulating arms</span>
+                <span class="project-tag">Small-footprint</span>
+                <span class="project-tag">Legacy buildings</span>
+              </div>
+            </div>
+
+            <div class="project-image-placeholder">
+              <span>Photo placeholder &mdash; Wall-mounted arm in legacy room</span>
+            </div>
+
+            <div class="project-metrics">
+              <div>
+                <div class="metric-label">Scope</div>
+                <div class="metric-data">Multiple legacy units</div>
+              </div>
+              <div>
+                <div class="metric-label">Challenge</div>
+                <div class="metric-data">No built-in work surface</div>
+              </div>
+              <div>
+                <div class="metric-label">Outcome</div>
+                <div class="metric-data" style="color:var(--color-success);">Full EMR access</div>
+              </div>
+              <div>
+                <div class="metric-label">Footprint</div>
+                <div class="metric-data">Slim, stowable</div>
+              </div>
+            </div>
+
+            <div class="project-footer-row">
+              <span>Retrofit arms &amp; compact keyboards</span>
+              <button type="button" class="project-expand-toggle">
+                <span>View details</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-expand">
+              <div class="project-expand-inner">
+                <div class="project-expand-grid">
+                  <div>
+                    <div class="project-expand-heading">The challenge</div>
+                    <p class="project-expand-text">
+                      Older facilities had nowhere to place a workstation without stealing space 
+                      from care teams. Carts created congestion in already tight rooms.
+                    </p>
+                    <div class="project-expand-heading">The Seamless approach</div>
+                    <ul class="project-expand-list">
+                      <li>Surveyed wall construction, bracing, and chase space in each legacy unit.</li>
+                      <li>Specified articulating arms and fold-up keyboards sized to wall and bed layouts.</li>
+                      <li>Routed cabling vertically to maintain wipeable surfaces and clear paths.</li>
+                      <li>Developed standard configurations that could be replicated room to room.</li>
+                    </ul>
+                    <div class="project-expand-heading" style="margin-top:10px;">Outcome</div>
+                    <p class="project-expand-text">
+                      Shared rooms and older layouts now have true point-of-care EMR access without
+                      sacrificing mobility or storage.
+                    </p>
+                  </div>
+                  <div>
+                    <div class="project-image-small-grid">
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; legacy room before
+                      </div>
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; after with compact workspace
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: Anesthesia Carts -->
+          <article class="card project-card" data-category="or anesthesia">
+            <div class="project-header">
+              <span class="card-overline">Perioperative · Anesthesia</span>
+              <h3>Integrating EMR on anesthesia machines</h3>
+              <p class="project-subtitle">
+                Added laptops, displays, and peripherals onto existing anesthesia carts without
+                affecting safety, balance, or workflow.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">OR</span>
+                <span class="project-tag">Custom mounting</span>
+                <span class="project-tag">After-hours work</span>
+              </div>
+            </div>
+
+            <div class="project-image-placeholder">
+              <span>Photo placeholder &mdash; Anesthesia cart with added monitor</span>
+            </div>
+
+            <div class="project-metrics">
+              <div>
+                <div class="metric-label">Scope</div>
+                <div class="metric-data">Fleet of anesthesia machines</div>
+              </div>
+              <div>
+                <div class="metric-label">Hardware</div>
+                <div class="metric-data">PC, LCD, scanner, UPS</div>
+              </div>
+              <div>
+                <div class="metric-label">Outcome</div>
+                <div class="metric-data" style="color:var(--color-success);">Anesthesiologist-approved</div>
+              </div>
+              <div>
+                <div class="metric-label">Timing</div>
+                <div class="metric-data">Evenings/weekends</div>
+              </div>
+            </div>
+
+            <div class="project-footer-row">
+              <span>OR &amp; anesthesia cart retrofits</span>
+              <button type="button" class="project-expand-toggle">
+                <span>View details</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-expand">
+              <div class="project-expand-inner">
+                <div class="project-expand-grid">
+                  <div>
+                    <div class="project-expand-heading">The challenge</div>
+                    <p class="project-expand-text">
+                      Anesthesia carts were already packed with critical devices. Teams needed 
+                      an additional display, keyboard, and scanner without compromising clearances 
+                      or tipping risk.
+                    </p>
+                    <div class="project-expand-heading">The Seamless approach</div>
+                    <ul class="project-expand-list">
+                      <li>Catalogued all existing equipment and weight distribution on the cart.</li>
+                      <li>Added mounting channels matched to cart geometry and OR clearances.</li>
+                      <li>Selected mounts tested for load, tilt, and rotation.</li>
+                      <li>Built a demo cart, iterated with anesthesia teams, then scaled to all units.</li>
+                    </ul>
+                    <div class="project-expand-heading" style="margin-top:10px;">Outcome</div>
+                    <p class="project-expand-text">
+                      Anesthesia teams gained full EMR access at the cart. OR turnover stayed on time, 
+                      and installs happened outside of scheduled cases.
+                    </p>
+                  </div>
+                  <div>
+                    <div class="project-image-small-grid">
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; baseline anesthesia cart
+                      </div>
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; retrofitted cart with EMR hardware
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5: Surgery Tracking Boards -->
+          <article class="card project-card" data-category="signage or">
+            <div class="project-header">
+              <span class="card-overline">Perioperative · Visibility</span>
+              <h3>Multi-site surgery tracking boards</h3>
+              <p class="project-subtitle">
+                Mounted LED tracking boards across waiting areas, nurse stations, and OR corridors
+                with visibility tuned to each environment.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Tracking boards</span>
+                <span class="project-tag">24/7 runtime</span>
+                <span class="project-tag">Ambient light planning</span>
+              </div>
+            </div>
+
+            <div class="project-image-placeholder">
+              <span>Photo placeholder &mdash; OR tracking board cluster</span>
+            </div>
+
+            <div class="project-metrics">
+              <div>
+                <div class="metric-label">Scope</div>
+                <div class="metric-data">Multi-facility rollout</div>
+              </div>
+              <div>
+                <div class="metric-label">Displays</div>
+                <div class="metric-data">Dozens of LEDs</div>
+              </div>
+              <div>
+                <div class="metric-label">Outcome</div>
+                <div class="metric-data" style="color:var(--color-success);">Clear at all distances</div>
+              </div>
+              <div>
+                <div class="metric-label">Run Time</div>
+                <div class="metric-data">24/7 operation</div>
+              </div>
+            </div>
+
+            <div class="project-footer-row">
+              <span>Surgery tracking boards · Multi-site</span>
+              <button type="button" class="project-expand-toggle">
+                <span>View details</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-expand">
+              <div class="project-expand-inner">
+                <div class="project-expand-grid">
+                  <div>
+                    <div class="project-expand-heading">The challenge</div>
+                    <p class="project-expand-text">
+                      A visibility initiative called for tracking boards in very different spaces: 
+                      bright waiting rooms, controlled OR corridors, and staffed nurse stations&mdash;
+                      all with different viewing distances.
+                    </p>
+                    <div class="project-expand-heading">The Seamless approach</div>
+                    <ul class="project-expand-list">
+                      <li>Matched display size to average viewing distance and line of sight.</li>
+                      <li>Specified commercial-grade LEDs with 24/7 runtime for critical boards.</li>
+                      <li>Positioned units relative to ambient light and activated auto-dimming where needed.</li>
+                      <li>Used low-profile mounts and thin bezels in corridors to meet safety clearances.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div class="project-image-small-grid">
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; waiting room tracking board
+                      </div>
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; nurse station / hallway boards
+                      </div>
+                    </div>
+                    <p class="project-note">
+                      Swap in photos from any existing tracking board install or mockup boards.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6: Digital Signage & Wayfinding -->
+          <article class="card project-card" data-category="signage ambulatory">
+            <div class="project-header">
+              <span class="card-overline">Digital Signage · Wayfinding</span>
+              <h3>Elevated wayfinding in high-traffic areas</h3>
+              <p class="project-subtitle">
+                Replaced static signs with digital displays at entrances, elevator banks, and hubs
+                to guide visitors without adding visual clutter.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Lobby &amp; corridors</span>
+                <span class="project-tag">Digital wayfinding</span>
+              </div>
+            </div>
+
+            <div class="project-image-placeholder">
+              <span>Photo placeholder &mdash; Lobby digital signage</span>
+            </div>
+
+            <div class="project-metrics">
+              <div>
+                <div class="metric-label">Scope</div>
+                <div class="metric-data">Key public touchpoints</div>
+              </div>
+              <div>
+                <div class="metric-label">Goal</div>
+                <div class="metric-data">Clear, modern wayfinding</div>
+              </div>
+              <div>
+                <div class="metric-label">Outcome</div>
+                <div class="metric-data" style="color:var(--color-success);">Improved navigation</div>
+              </div>
+              <div>
+                <div class="metric-label">Constraints</div>
+                <div class="metric-data">Space &amp; safety</div>
+              </div>
+            </div>
+
+            <div class="project-footer-row">
+              <span>Digital signage &amp; wayfinding</span>
+              <button type="button" class="project-expand-toggle">
+                <span>View details</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-expand">
+              <div class="project-expand-inner">
+                <div class="project-expand-grid">
+                  <div>
+                    <div class="project-expand-heading">The challenge</div>
+                    <p class="project-expand-text">
+                      Visitors needed clearer directions at entrances and hubs. Static signs were hard 
+                      to keep current, and there was limited floor space for freestanding kiosks.
+                    </p>
+                    <div class="project-expand-heading">The Seamless approach</div>
+                    <ul class="project-expand-list">
+                      <li>Identified “decision points” like entrances, elevator cores, and main corridors.</li>
+                      <li>Recommended display sizes and mount styles appropriate to each location.</li>
+                      <li>Routed cabling to keep surfaces clean and avoid creating obstacles.</li>
+                      <li>Ensured all hardware placements aligned with life safety and egress requirements.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div class="project-image-small-grid">
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; entrance display
+                      </div>
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; elevator lobby display
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 7: L&D Dual Monitor Carts -->
+          <article class="card project-card" data-category="ld bedside">
+            <div class="project-header">
+              <span class="card-overline">Labor &amp; Delivery · Carts</span>
+              <h3>Dual-monitor fetal monitoring carts</h3>
+              <p class="project-subtitle">
+                Retrofitted existing fetal monitor carts with dual displays so clinicians can monitor strips
+                and chart at the same time.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">L&amp;D</span>
+                <span class="project-tag">Dual displays</span>
+                <span class="project-tag">Retrofit</span>
+              </div>
+            </div>
+
+            <div class="project-image-placeholder">
+              <span>Photo placeholder &mdash; L&amp;D cart with dual monitors</span>
+            </div>
+
+            <div class="project-metrics">
+              <div>
+                <div class="metric-label">Scope</div>
+                <div class="metric-data">Large L&amp;D fleet</div>
+              </div>
+              <div>
+                <div class="metric-label">Hardware</div>
+                <div class="metric-data">Dual LCDs</div>
+              </div>
+              <div>
+                <div class="metric-label">Outcome</div>
+                <div class="metric-data" style="color:var(--color-success);">Streamlined workflow</div>
+              </div>
+              <div>
+                <div class="metric-label">ROI</div>
+                <div class="metric-data">Extended asset life</div>
+              </div>
+            </div>
+
+            <div class="project-footer-row">
+              <span>L&amp;D fetal monitoring carts</span>
+              <button type="button" class="project-expand-toggle">
+                <span>View details</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-expand">
+              <div class="project-expand-inner">
+                <div class="project-expand-grid">
+                  <div>
+                    <div class="project-expand-heading">The challenge</div>
+                    <p class="project-expand-text">
+                      Single all-in-one PCs forced clinicians to toggle between charting and fetal strips, 
+                      creating friction in high-acuity situations. New carts were not in budget.
+                    </p>
+                    <div class="project-expand-heading">The Seamless approach</div>
+                    <ul class="project-expand-list">
+                      <li>Evaluated existing wood carts for structural support and clearances.</li>
+                      <li>Designed a vertical dual-monitor bracket that did not increase the footprint.</li>
+                      <li>Positioned the strips monitor above and charting monitor at eye level.</li>
+                      <li>Completed retrofits in batches to avoid disrupting coverage.</li>
+                    </ul>
+                    <div class="project-expand-heading" style="margin-top:10px;">Outcome</div>
+                    <p class="project-expand-text">
+                      L&amp;D staff can now see strips continuously while charting. Carts remain 
+                      mobile and familiar, but offer a dramatically better workstation experience.
+                    </p>
+                  </div>
+                  <div>
+                    <div class="project-image-small-grid">
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; original single-display cart
+                      </div>
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; retrofitted dual-monitor cart
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 8: Infection Control Enhancements -->
+          <article class="card project-card" data-category="infection bedside cable">
+            <div class="project-header">
+              <span class="card-overline">Infection Control · Hardware</span>
+              <h3>Hard-to-clean workstations made wipeable</h3>
+              <p class="project-subtitle">
+                Replaced high-touch input devices and reorganized cabling so EVS teams can fully clean
+                workstations without fighting clutter.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Infection control</span>
+                <span class="project-tag">Cable management</span>
+              </div>
+            </div>
+
+            <div class="project-image-placeholder">
+              <span>Photo placeholder &mdash; workstation cabling &amp; keyboard detail</span>
+            </div>
+
+            <div class="project-metrics">
+              <div>
+                <div class="metric-label">Scope</div>
+                <div class="metric-data">High-touch workstations</div>
+              </div>
+              <div>
+                <div class="metric-label">Devices</div>
+                <div class="metric-data">Keyboards, mice, carts</div>
+              </div>
+              <div>
+                <div class="metric-label">Outcome</div>
+                <div class="metric-data" style="color:var(--color-success);">More wipeable surfaces</div>
+              </div>
+              <div>
+                <div class="metric-label">Focus</div>
+                <div class="metric-data">HAI risk reduction</div>
+              </div>
+            </div>
+
+            <div class="project-footer-row">
+              <span>Infection control-driven layouts</span>
+              <button type="button" class="project-expand-toggle">
+                <span>View details</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="project-expand">
+              <div class="project-expand-inner">
+                <div class="project-expand-grid">
+                  <div>
+                    <div class="project-expand-heading">The challenge</div>
+                    <p class="project-expand-text">
+                      As more technology entered the room, keyboards, mice, and cables became 
+                      difficult to disinfect. Cluttered surfaces made thorough cleaning unrealistic.
+                    </p>
+                    <div class="project-expand-heading">The Seamless approach</div>
+                    <ul class="project-expand-list">
+                      <li>Introduced wipeable, flat-surface keyboards and mice where appropriate.</li>
+                      <li>Re-routed and bundled cabling to open up work surfaces.</li>
+                      <li>Worked with infection control to align hardware choices with cleaning protocol.</li>
+                      <li>Standardized layouts so EVS knows exactly what “clean” should look like.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div class="project-image-small-grid">
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; close-up of wipeable peripherals
+                      </div>
+                      <div class="project-image-small-placeholder">
+                        Photo placeholder &mdash; cable-managed workstation for EVS
+                      </div>
+                    </div>
+                    <p class="project-note">
+                      These placeholders are perfect for detail shots of keyboards, mice, and cabling.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-mark" style="width:28px; height:28px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <path d="M4 6h16M4 12h10M4 18h8" />
+            </svg>
+          </div>
+          <span class="logo-text">Seamless POC</span>
+          <p style="margin-top:16px; font-size:0.85rem; color:#64748b; line-height:1.5;">
+            We handle the physical layer of your healthcare IT installs so your teams can stay focused 
+            on care, not cords and carts.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Work</h4>
+          <ul>
+            <li><a href="#projects">Bedside EMR</a></li>
+            <li><a href="#projects">OR &amp; Anesthesia</a></li>
+            <li><a href="#projects">L&amp;D Carts</a></li>
+            <li><a href="#projects">Digital Signage</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:support@seamlesspoc.com">support@seamlesspoc.com</a></li>
+            <li>1-800-555-0199</li>
+            <li><a href="index.html#contact">Book an assessment</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 Seamless Point of Care. All rights reserved.</span>
+        <span>Healthcare IT Integration · Clinical Workspaces</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple filter + expand logic
+    document.addEventListener('DOMContentLoaded', function () {
+      const filterChips = document.querySelectorAll('.filter-chip');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const filter = chip.getAttribute('data-filter');
+
+          filterChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+
+          projectCards.forEach(card => {
+            const categories = (card.getAttribute('data-category') || "").split(/\s+/);
+            if (filter === 'all' || categories.includes(filter)) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      projectCards.forEach(card => {
+        const toggle = card.querySelector('.project-expand-toggle');
+        if (!toggle) return;
+
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          card.classList.toggle('expanded');
+        });
+
+        // Optional: clicking anywhere on card (except buttons) also toggles
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.project-expand-toggle')) return;
+          card.classList.toggle('expanded');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
