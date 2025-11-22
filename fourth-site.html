@@ -567,25 +567,14 @@
   justify-content: flex-start;
   align-items: center;
   gap: 48px;
-  animation: logo-scroll 30s linear infinite;
+  animation: logo-scroll 20s linear infinite;
 }
 
 .logo-row img {
   height: 70px;
   width: auto;
-  filter: grayscale(100%);
-  opacity: 0.5;
-  transition: all 0.3s ease;
-}
-
-.logo-row img:hover {
-  filter: grayscale(0);
+  filter: none;
   opacity: 1;
-}
-
-/* Pause scroll on hover (nice touch on desktop) */
-.logo-strip:hover .logo-row {
-  animation-play-state: paused;
 }
 
 @media (max-width: 768px) {
