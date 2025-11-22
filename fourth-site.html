@@ -567,7 +567,9 @@
   justify-content: flex-start;
   align-items: center;
   gap: 48px;
+  padding-right: 48px;
   animation: logo-scroll 20s linear infinite;
+  will-change: transform;
 }
 
 .logo-row img {
@@ -587,7 +589,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.3333%);
+    transform: translateX(calc(-100% / 3));
   }
 }
 
