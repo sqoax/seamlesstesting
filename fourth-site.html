@@ -580,8 +580,13 @@
 }
 
 @media (max-width: 768px) {
-  .logo-row { gap: 24px; }
-  .logo-row img { height: 28px; }
+  .logo-row { 
+    gap: 24px; 
+    padding-right: 24px; /* <--- ADD THIS so they match again */
+  }
+  .logo-row img { 
+    height: 28px; 
+  }
 }
 
     @keyframes logo-scroll {
