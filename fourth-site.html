@@ -89,6 +89,27 @@
       font-size: 1.05rem;
     }
 
+    /* --- Dynamic Text Effect --- */
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  background-color: var(--color-primary);
+  animation: blink 1s infinite;
+  margin-left: 4px;
+  vertical-align: middle;
+  height: 1em; /* Scales with font size */
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Optional: Ensure the changing text matches your brand blue */
+#dynamic-text {
+  color: var(--color-primary);
+}
+    
     /* --- 4. Utility Components --- */
     .container {
       max-width: var(--container-width);
@@ -665,7 +686,7 @@
               <span class="badge-dot"></span>
               Healthcare IT Hardware Installs
             </div>
-            <h1>Clinical-ready workspaces, installed without disrupting care.</h1>
+            <h1>Reliable installs for <span id="dynamic-text"></span><span class="typing-cursor"></span></h1>
             <p>Seamless Point of Care designs, installs, and maintains hardware so your go-lives stay on schedule and clinicians get safe workspaces that just work.</p>
             
             <div class="hero-actions">
@@ -1113,5 +1134,57 @@
     </div>
   </footer>
 
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const textElement = document.getElementById('dynamic-text');
+    // These are the 5 things that will swap
+    const phrases = [
+      "Medical Carts.",
+      "Wall Mounts.",
+      "Workstations.",
+      "Cable Paths.",
+      "Patient Rooms."
+    ];
+    
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 100; // Speed of typing
+    
+    function typeEffect() {
+      const currentPhrase = phrases[phraseIndex];
+      
+      if (isDeleting) {
+        // Deleting text
+        textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 50; // Delete faster than typing
+      } else {
+        // Typing text
+        textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 100;
+      }
+      
+      // Determine next step
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        // Finished typing phrase, pause before deleting
+        isDeleting = true;
+        typeSpeed = 2000; // Wait 2 seconds before deleting
+      } else if (isDeleting && charIndex === 0) {
+        // Finished deleting, move to next phrase
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500; // Pause briefly before typing next word
+      }
+      
+      setTimeout(typeEffect, typeSpeed);
+    }
+    
+    // Start the effect
+    typeEffect();
+  });
+</script>
+  
 </body>
 </html>
