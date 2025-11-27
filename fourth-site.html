@@ -327,6 +327,33 @@
     .step-item:nth-child(1) .step-num { background: var(--color-primary-light); color: var(--color-primary); border-color: transparent; }
     .step-item:nth-child(2) .step-num { background: var(--color-success-bg); color: var(--color-success); border-color: transparent; }
 
+    /* --- Pulse & Flow Animation --- */
+
+/* 1. Default state: Slightly dimmed and smaller */
+.step-item {
+  opacity: 0.5;                /* Fade out inactive items */
+  transform: scale(0.98);      /* Shrink slightly */
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition */
+  border: 1px solid transparent; /* Prepare border for active state */
+}
+
+/* 2. Active State: Fully visible, white background, shadow */
+.step-item.active {
+  opacity: 1;
+  transform: scale(1);
+  background: white;
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+/* 3. Keep the number circle highlighted when active */
+.step-item.active .step-num {
+  box-shadow: 0 0 0 4px var(--color-primary-light);
+  background-color: var(--color-primary);
+  color: white;
+  border-color: transparent;
+}
+    
     /* --- 7. Stats Bar --- */
     .stats-container { margin-top: 48px; }
     
@@ -1184,6 +1211,55 @@
     // Start the effect
     typeEffect();
   });
+
+    /* --- Pulse & Flow Logic --- */
+  const steps = document.querySelectorAll('.step-item');
+  const stepContainer = document.querySelector('.step-list');
+  let activeStepIndex = 0;
+  let stepInterval;
+
+  function highlightStep(index) {
+    // Remove active class from all steps
+    steps.forEach((step, i) => {
+      if (i === index) {
+        step.classList.add('active');
+      } else {
+        step.classList.remove('active');
+      }
+    });
+  }
+
+  function startStepLoop() {
+    // Run immediately
+    highlightStep(activeStepIndex);
+    
+    // Then run every 3000ms (3 seconds)
+    stepInterval = setInterval(() => {
+      activeStepIndex = (activeStepIndex + 1) % steps.length;
+      highlightStep(activeStepIndex);
+    }, 3000);
+  }
+
+  function stopStepLoop() {
+    clearInterval(stepInterval);
+  }
+
+  // Start the animation
+  startStepLoop();
+
+  // INTERACTION: Pause animation if user hovers over the list
+  if (stepContainer) {
+    stepContainer.addEventListener('mouseenter', stopStepLoop);
+    stepContainer.addEventListener('mouseleave', startStepLoop);
+    
+    // If they hover a specific item, light that one up immediately
+    steps.forEach((step, index) => {
+      step.addEventListener('mouseenter', () => {
+        highlightStep(index);
+        activeStepIndex = index; // Sync index so it resumes from here
+      });
+    });
+  }
 </script>
   
 </body>
