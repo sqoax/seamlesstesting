@@ -264,13 +264,16 @@
     }
 
     .hero-content h1 {
-      background: linear-gradient(to right, var(--color-text-main), var(--color-text-body));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      /* Fallback */
-      color: var(--color-text-main); 
-    }
+  /* keep basic h1 layout, but no gradient/transparent text here */
+  color: var(--color-text-main);
+}
+
+    .hero-title-static {
+  background: linear-gradient(to right, var(--color-text-main), var(--color-text-body));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
     .hero-actions {
       display: flex;
