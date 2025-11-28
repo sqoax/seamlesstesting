@@ -90,6 +90,28 @@
       font-size: 1.05rem;
     }
 
+    /* --- Vertical Text Slide Animation --- */
+.rotator-window {
+  display: inline-block;
+  vertical-align: bottom;
+  height: 1.15em;        /* Matches the H1 line-height */
+  overflow: hidden;      /* Hides the words waiting below */
+  position: relative;
+  color: var(--color-primary); /* Makes the changing text Blue */
+  margin-bottom: -0.02em; /* Optical alignment */
+}
+
+.rotator-list {
+  display: block;
+  /* We control the transition in JS to allow for the infinite loop "snap" */
+}
+
+.rotator-list span {
+  display: block;
+  height: 1.15em;        /* Must match window height */
+  white-space: nowrap;   /* Keeps words on one line */
+}
+
     /* --- 4. Utility Components --- */
     .container {
       max-width: var(--container-width);
@@ -666,7 +688,17 @@
               <span class="badge-dot"></span>
               Healthcare IT Hardware Installs
             </div>
-            <h1>Clinical-ready workspaces, installed without disrupting care.</h1>
+            <h1>Expert support for 
+  <span class="rotator-window">
+    <span class="rotator-list">
+      <span>EMR Rollouts.</span>
+      <span>Tech Refreshes.</span>
+      <span>Clinic Openings.</span>
+      <span>Cable Cleanup.</span>
+      <span>Hardware Audits.</span>
+      <span>EMR Rollouts.</span>
+    </span>
+  </span></h1>
             <p>Seamless Point of Care designs, installs, and maintains hardware so your go-lives stay on schedule and clinicians get safe workspaces that just work.</p>
             
             <div class="hero-actions">
@@ -1114,5 +1146,38 @@
     </div>
   </footer>
 
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const list = document.querySelector('.rotator-list');
+    const items = list.querySelectorAll('span');
+    const itemHeight = 1.15; // Must match CSS em height
+    let currentIndex = 0;
+    
+    // We have 6 items (5 real + 1 clone). 
+    // When we hit index 5 (the clone), we snap back to 0.
+    
+    function slideText() {
+      currentIndex++;
+      
+      // 1. Animate the slide up
+      list.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)'; // "Spring" ease
+      list.style.transform = `translateY(-${currentIndex * itemHeight}em)`;
+      
+      // 2. Check if we reached the clone (the last item)
+      if (currentIndex === items.length - 1) {
+        // Wait for the animation to finish (600ms), then snap back instantly
+        setTimeout(() => {
+          list.style.transition = 'none'; // Turn off animation
+          currentIndex = 0;               // Reset index
+          list.style.transform = 'translateY(0)'; // Snap back to top
+        }, 600);
+      }
+    }
+
+    // Run every 3 seconds
+    setInterval(slideText, 3000);
+  });
+</script>
+  
 </body>
 </html>
