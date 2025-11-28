@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,28 +90,6 @@
       font-size: 1.05rem;
     }
 
-  /* --- Vertical Text Slide Effect --- */
-.rotator-window {
-  display: inline-block;
-  vertical-align: bottom;
-  height: 1.15em;        /* Matches your H1 line-height */
-  overflow: hidden;      /* Hides the other words */
-  position: relative;
-  margin-bottom: -0.05em; /* Optical alignment */
-}
-
-.rotator-list {
-  display: block;
-  /* This bezier curve creates the "Snap" effect from your video */
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.rotator-list span {
-  display: block;
-  height: 1.15em;        /* Must match window height */
-  color: var(--color-primary);
-}
-    
     /* --- 4. Utility Components --- */
     .container {
       max-width: var(--container-width);
@@ -328,33 +307,6 @@
     .step-item:nth-child(1) .step-num { background: var(--color-primary-light); color: var(--color-primary); border-color: transparent; }
     .step-item:nth-child(2) .step-num { background: var(--color-success-bg); color: var(--color-success); border-color: transparent; }
 
-    /* --- Pulse & Flow Animation --- */
-
-/* 1. Default state: Slightly dimmed and smaller */
-.step-item {
-  opacity: 0.5;                /* Fade out inactive items */
-  transform: scale(0.98);      /* Shrink slightly */
-  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition */
-  border: 1px solid transparent; /* Prepare border for active state */
-}
-
-/* 2. Active State: Fully visible, white background, shadow */
-.step-item.active {
-  opacity: 1;
-  transform: scale(1);
-  background: white;
-  border-color: var(--color-primary-light);
-  box-shadow: var(--shadow-md);
-}
-
-/* 3. Keep the number circle highlighted when active */
-.step-item.active .step-num {
-  box-shadow: 0 0 0 4px var(--color-primary-light);
-  background-color: var(--color-primary);
-  color: white;
-  border-color: transparent;
-}
-    
     /* --- 7. Stats Bar --- */
     .stats-container { margin-top: 48px; }
     
@@ -714,19 +666,7 @@
               <span class="badge-dot"></span>
               Healthcare IT Hardware Installs
             </div>
-            <h1>
-  Reliable installs for 
-  <span class="rotator-window">
-    <span class="rotator-list">
-      <span>Medical Carts.</span>
-      <span>Wall Mounts.</span>
-      <span>Workstations.</span>
-      <span>Cable Paths.</span>
-      <span>Patient Rooms.</span>
-      <span>Medical Carts.</span>
-    </span>
-  </span>
-</h1>
+            <h1>Clinical-ready workspaces, installed without disrupting care.</h1>
             <p>Seamless Point of Care designs, installs, and maintains hardware so your go-lives stay on schedule and clinicians get safe workspaces that just work.</p>
             
             <div class="hero-actions">
@@ -1174,67 +1114,5 @@
     </div>
   </footer>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-  
-  // --- 1. Vertical Text Slide ---
-  const list = document.querySelector('.rotator-list');
-  const items = list.querySelectorAll('span');
-  const itemHeight = 1.15; // em units, must match CSS
-  let currentIndex = 0;
-
-  function slideText() {
-    currentIndex++;
-    // Move the list up
-    list.style.transform = `translateY(-${currentIndex * itemHeight}em)`;
-    list.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-
-    // Reset loop smoothly
-    if (currentIndex === items.length - 1) {
-      setTimeout(() => {
-        list.style.transition = 'none'; // Disable animation for instant jump
-        currentIndex = 0;
-        list.style.transform = `translateY(0)`;
-      }, 600); // Wait for animation to finish before resetting
-    }
-  }
-
-  // Slide every 3 seconds
-  setInterval(slideText, 3000);
-
-
-  // --- 2. Interactive Card (HOVER ONLY - No Auto Loop) ---
-  const steps = document.querySelectorAll('.step-item');
-  const stepContainer = document.querySelector('.step-list');
-
-  function highlightStep(index) {
-    steps.forEach((step, i) => {
-      if (i === index) {
-        step.classList.add('active');
-      } else {
-        step.classList.remove('active');
-      }
-    });
-  }
-
-  // Set default state (Optionally highlight #1, or leave all neutral)
-  highlightStep(0); 
-
-  // Interaction: Highlight ONLY when hovering
-  if (stepContainer) {
-    steps.forEach((step, index) => {
-      step.addEventListener('mouseenter', () => {
-        highlightStep(index);
-      });
-    });
-    
-    // Optional: Reset to #1 when mouse leaves? 
-    // Uncomment next line if you want it to snap back to #1
-    // stepContainer.addEventListener('mouseleave', () => highlightStep(0));
-  }
-
-});
-</script>
-  
 </body>
 </html>
