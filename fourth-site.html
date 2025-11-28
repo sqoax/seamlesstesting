@@ -90,26 +90,27 @@
       font-size: 1.05rem;
     }
 
-    /* --- Vertical Text Slide Animation --- */
+   /* --- Vertical Text Slide Animation --- */
 .rotator-window {
   display: inline-block;
-  vertical-align: bottom;
-  height: 1.15em;        /* Matches the H1 line-height */
-  overflow: hidden;      /* Hides the words waiting below */
+  vertical-align: top;    /* <--- Changed from bottom to top */
+  height: 1.2em;          /* <--- Increased slightly for breathing room */
+  overflow: hidden;
   position: relative;
-  color: var(--color-primary); /* Makes the changing text Blue */
-  margin-bottom: -0.02em; /* Optical alignment */
+  color: var(--color-primary); 
+  margin-top: -0.1em;     /* <--- Adjusts alignment to match the H1 */
 }
 
 .rotator-list {
   display: block;
-  /* We control the transition in JS to allow for the infinite loop "snap" */
 }
 
 .rotator-list span {
   display: block;
-  height: 1.15em;        /* Must match window height */
-  white-space: nowrap;   /* Keeps words on one line */
+  height: 1.2em;          /* <--- Must match window height */
+  line-height: 1.2em;     /* <--- Forces text to center in the box */
+  white-space: nowrap;
+  padding-top: 0.1em;     /* <--- Pushes text down slightly to prevent top-clipping */
 }
 
     /* --- 4. Utility Components --- */
@@ -1150,7 +1151,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     const list = document.querySelector('.rotator-list');
     const items = list.querySelectorAll('span');
-    const itemHeight = 1.15; // Must match CSS em height
+    const itemHeight = 1.2; // Must match CSS em height
     let currentIndex = 0;
     
     // We have 6 items (5 real + 1 clone). 
