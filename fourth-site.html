@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,6 +90,39 @@
       margin-bottom: 1.25rem;
       font-size: 1.05rem;
     }
+
+   .hero-title {
+  /* your existing H1 styles + these */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em;
+}
+
+.hero-title-static {
+  /* optional – just inherits H1 font/size */
+}
+
+/* --- Vertical Text Slide Animation --- */
+.rotator-window {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  color: var(--color-primary);
+  /* spacing from the static text if you want */
+  /* margin-left: 0.1em; */
+}
+
+.rotator-list {
+  display: block;
+  transform: translateY(0);
+}
+
+.rotator-list span {
+  display: block;
+  white-space: nowrap;
+  /* height / line-height will be set by JS */
+}
 
     /* --- 4. Utility Components --- */
     .container {
@@ -231,13 +265,16 @@
     }
 
     .hero-content h1 {
-      background: linear-gradient(to right, var(--color-text-main), var(--color-text-body));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      /* Fallback */
-      color: var(--color-text-main); 
-    }
+  /* keep basic h1 layout, but no gradient/transparent text here */
+  color: var(--color-text-main);
+}
+
+    .hero-title-static {
+  background: linear-gradient(to right, var(--color-text-main), var(--color-text-body));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
     .hero-actions {
       display: flex;
@@ -666,7 +703,20 @@
               <span class="badge-dot"></span>
               Healthcare IT Hardware Installs
             </div>
-            <h1>Clinical-ready workspaces, installed without disrupting care.</h1>
+            <h1 class="hero-title">
+  <span class="hero-title-static">Expert support for</span>
+  <span class="rotator-window">
+    <span class="rotator-list">
+      <span>EMR Rollouts.</span>
+      <span>Tech Refreshes.</span>
+      <span>Clinic Openings.</span>
+      <span>Cable Cleanup.</span>
+      <span>Hardware Audits.</span>
+      <!-- clone of the first item for seamless loop -->
+      <span>EMR Rollouts.</span>
+    </span>
+  </span>
+</h1>
             <p>Seamless Point of Care designs, installs, and maintains hardware so your go-lives stay on schedule and clinicians get safe workspaces that just work.</p>
             
             <div class="hero-actions">
@@ -1114,5 +1164,48 @@
     </div>
   </footer>
 
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const windowEl = document.querySelector('.rotator-window');
+  const list = document.querySelector('.rotator-list');
+  if (!windowEl || !list) return;
+
+  const items = list.querySelectorAll('span');
+  if (!items.length) return;
+
+  // Measure the real height of one item (in px)
+  const itemHeight = items[0].getBoundingClientRect().height;
+
+  // Lock the window and items to this height so nothing clips
+  windowEl.style.height = `${itemHeight}px`;
+  items.forEach(span => {
+    span.style.height = `${itemHeight}px`;
+    span.style.lineHeight = `${itemHeight}px`;
+  });
+
+  let currentIndex = 0;
+
+  function slideText() {
+    currentIndex += 1;
+
+    // Slide up one item
+    list.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    list.style.transform = `translateY(-${currentIndex * itemHeight}px)`;
+
+    // If we hit the clone (last item), jump back to the real first
+    if (currentIndex === items.length - 1) {
+      setTimeout(() => {
+        list.style.transition = 'none';
+        currentIndex = 0;
+        list.style.transform = 'translateY(0)';
+      }, 600);
+    }
+  }
+
+  // Start rotating every 3 seconds
+  setInterval(slideText, 3000);
+});
+</script>
+  
 </body>
 </html>
