@@ -666,14 +666,30 @@
   max-width: 1600px;
 }
 
-    /* --- NEW: Hero Image Rotator Styles --- */
+    /* --- NEW: Updated Hero Card Styles --- */
+    /* This handles the side-by-side layout on desktop */
+    .hero-card-inner {
+      display: flex;
+      flex-direction: row; /* Side-by-side on desktop */
+      height: 100%;
+      min-height: 400px;   /* Consistent height */
+    }
+
     .hero-image-container {
-      height: 220px;
-      width: 100%;
+      width: 45%;          /* Image takes left 45% */
       position: relative;
       background: #f1f5f9;
+      overflow: hidden;
     }
     
+    .hero-text-content {
+      width: 55%;          /* Text takes right 55% */
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Centers text vertically */
+    }
+
     .hero-slide {
       position: absolute;
       top: 0;
@@ -690,15 +706,21 @@
       opacity: 1;
       z-index: 1;
     }
-    
-    .hero-image-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 80px;
-      background: linear-gradient(to top, rgba(255,255,255,1), transparent);
-      z-index: 2;
+
+    /* Mobile Responsive: Stack them again on small screens */
+    @media (max-width: 992px) {
+      .hero-card-inner {
+        flex-direction: column; /* Stack on mobile */
+        height: auto;
+      }
+      .hero-image-container {
+        width: 100%;
+        height: 250px; /* Fixed height for image on mobile */
+      }
+      .hero-text-content {
+        width: 100%;
+        padding: 24px;
+      }
     }
 
   </style>
@@ -732,7 +754,8 @@
   <main>
     <section class="hero">
       <div class="container">
-        <div class="hero-grid">
+        <div class="hero-grid" style="grid-template-columns: 1fr 1.2fr;">
+          
           <div class="hero-content">
             <div class="badge">
               <span class="badge-dot"></span>
@@ -770,49 +793,50 @@
             </div>
           </div>
 
-          <div class="hero-visual-card" style="padding:0; overflow:hidden; display:flex; flex-direction:column;">
-            
-            <div class="hero-image-container">
-              <img src="photosinthefield/field1.jpeg" class="hero-slide active" alt="Clinical Lab Install">
+          <div class="hero-visual-card" style="padding:0; overflow:hidden;">
+            <div class="hero-card-inner">
               
-              <img src="photosinthefield/field2.jpeg" class="hero-slide" alt="Clean Desk Setup">
-              
-              <img src="photosinthefield/field3.jpeg" class="hero-slide" alt="Wall Mounted Workstation">
-              
-              <img src="photosinthefield/field4.jpeg" class="hero-slide" alt="Cable Management Detail">
+              <div class="hero-image-container">
+                <img src="photosinthefield/field1.jpeg" class="hero-slide active" alt="Clinical Lab Install">
+                <img src="photosinthefield/field2.jpeg" class="hero-slide" alt="Clean Desk Setup">
+                <img src="photosinthefield/field3.jpeg" class="hero-slide" alt="Wall Mounted Workstation">
+                <img src="photosinthefield/field4.jpeg" class="hero-slide" alt="Cable Management Detail">
+              </div>
 
-              <div class="hero-image-overlay"></div>
+              <div class="hero-text-content">
+                <div style="margin-bottom:16px">
+                  <span style="background:#e0f2fe; color:#0369a1; padding:4px 12px; border-radius:99px; font-size:0.75rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;">The Seamless Standard</span>
+                </div>
+                <h3 style="font-size:1.1rem; margin-bottom:16px;">How a rollout actually runs</h3>
+                
+                <div class="step-list">
+                  <div class="step-item" style="padding: 12px;">
+                    <div class="step-num" style="width:28px; height:28px; font-size:0.85rem;">1</div>
+                    <div>
+                      <div style="font-weight:700; font-size:0.9rem; color:var(--color-text-main)">Room-by-room plan</div>
+                      <div style="font-size:0.8rem; color:var(--color-text-body)">Mapping cable paths to fit clinical workflows.</div>
+                    </div>
+                  </div>
+                  <div class="step-item" style="padding: 12px;">
+                    <div class="step-num" style="width:28px; height:28px; font-size:0.85rem;">2</div>
+                    <div>
+                      <div style="font-weight:700; font-size:0.9rem; color:var(--color-text-main)">Quiet, clean installs</div>
+                      <div style="font-size:0.8rem; color:var(--color-text-body)">Evening/weekend windows. No debris.</div>
+                    </div>
+                  </div>
+                  <div class="step-item" style="padding: 12px;">
+                    <div class="step-num" style="width:28px; height:28px; font-size:0.85rem;">3</div>
+                    <div>
+                      <div style="font-weight:700; font-size:0.9rem; color:var(--color-text-main)">Lifecycle support</div>
+                      <div style="font-size:0.8rem; color:var(--color-text-body)">Tweaks and refreshes handled for you.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
             </div>
-
-            <div style="padding: 0 32px 32px 32px; margin-top:-20px; position:relative; z-index:3;">
-              <div style="margin-bottom:16px">
-                <span style="background:white; color:#0369a1; padding:4px 12px; border-radius:99px; font-size:0.75rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border:1px solid #e2e8f0;">The Seamless Standard</span>
-              </div>
-              <h3 style="font-size:1.1rem; margin-bottom:8px;">How a rollout actually runs</h3>
-              
-              <div class="step-list">
-                <div class="step-item">
-                  <div class="step-num">1</div>
-                  <div>
-                    <div style="font-weight:700; font-size:0.95rem; color:var(--color-text-main)">Room-by-room plan</div>
-                    <div style="font-size:0.85rem; color:var(--color-text-body)">Mapping cable paths and hardware to fit real clinical workflows.</div>
-                  </div>
-                </div>
-                <div class="step-item">
-                  <div class="step-num">2</div>
-                  <div>
-                    <div style="font-weight:700; font-size:0.95rem; color:var(--color-text-main)">Quiet, clean installs</div>
-                    <div style="font-size:0.85rem; color:var(--color-text-body)">Evening/weekend windows. No dust, no dangling cords.</div>
-                  </div>
-                </div>
-                <div class="step-item">
-                  <div class="step-num">3</div>
-                  <div>
-                    <div style="font-weight:700; font-size:0.95rem; color:var(--color-text-main)">Lifecycle support</div>
-                    <div style="font-size:0.85rem; color:var(--color-text-body)">We handle tweaks and refreshes so IT stays focused on software.</div>
-                  </div>
-                </div>
-              </div>
+          </div>
+        </div>
 
         <div class="stats-container">
           <div class="stats-bar">
@@ -833,6 +857,8 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
         <div class="logo-strip">
   <p>Trusted by leading health systems</p>
   <div class="logo-row">
